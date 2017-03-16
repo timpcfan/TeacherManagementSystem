@@ -22,6 +22,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Teacher.cpp" />
     <ClCompile Include="TeacherManagementSystem.cpp" />
+    <ClCompile Include="TeachingInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Teacher.h" />

@@ -35,7 +35,7 @@ public:
 	bool deleteMission();
 
 	//stream
-	friend ostream& operator<<(const ostream& out, const Teacher& teacher);
+	friend ostream& operator<<(ostream& out, const Teacher& teacher);
 
 
 	//comparator

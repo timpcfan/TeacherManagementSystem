@@ -24,6 +24,9 @@
     <ClCompile Include="TeacherManagementSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="TeachingInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Teacher.h">
