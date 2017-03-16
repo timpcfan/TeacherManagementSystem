@@ -56,12 +56,12 @@ void Teacher::setPost(string post)
 
 bool Teacher::assignMission(TeachingInfo & teachingInfo)
 {
-	m_teaMission.insert(teachingInfo);
+	m_missionSet.insert(teachingInfo);
 	return true;
 }
 
 void Teacher::printInfo()
 {
-	cout << "[" << m_id << "," << m_name << "," << m_gender << "," << m_post << "," << m_lessons << "," << m_class << "," << m_timeOfPractice << "," << m_timeOfExperiment << "," << m_totalTime << "]" << endl;
+	cout << "[" << m_id << "," << m_name << "," << m_gender << "," << m_post << "]" << endl;
 
 }

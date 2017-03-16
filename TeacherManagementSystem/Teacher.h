@@ -12,7 +12,7 @@ private:
 	string m_name;					//姓名
 	string m_gender;				//性别
 	string m_post;					//职称
-	set<TeachingInfo> m_teaMission;	//教学任务
+	set<TeachingInfo> m_missionSet;	//教学任务
 
 
 public:

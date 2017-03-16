@@ -21,12 +21,18 @@
     <ClCompile Include="Teacher.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="TeacherManagementSystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Teacher.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="TeachingInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TeacherManagementSystem.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
