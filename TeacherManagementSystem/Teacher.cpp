@@ -78,7 +78,7 @@ bool Teacher::__deleteMission(size_t no)
 	if (no > m_missionSet.size() || no < 1) {
 		return false;
 	}
-	set<TeachingMission>::iterator it;
+	set<TeachingMission>::iterator it = m_missionSet.begin();
 	for (size_t i = 1; i < no; i++) it++;
 	m_missionSet.erase(it);
 	return true;
@@ -138,6 +138,8 @@ bool Teacher::deleteMission()
 {
 	__listMission();
 	size_t no;
+
+	cout << "请输入要删除的教学任务编号：" ;
 	cin >> no;
 	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
 		cin.clear();
@@ -149,6 +151,7 @@ bool Teacher::deleteMission()
 		cout << "输入的编号所对应的教学任务不存在！" << endl;
 		return false;
 	}
+	cout << "删除成功！" << endl;
 	return true;
 }
 

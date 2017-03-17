@@ -28,8 +28,7 @@ int main() {
 	one.__assignMission(f);
 
 
-	one.__listMission();
-
+	one.deleteMission();
 
 
 	system("pause");
