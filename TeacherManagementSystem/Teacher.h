@@ -34,7 +34,7 @@ public: //临时改公有，测试用
 	//TeachingMissionMangement
 	bool __assignMission(TeachingMission &teachingMission);	//分配教学任务
 	void __listMission();									//输出该教师所有教学任务
-	bool __deleteMission(size_t no);							//删除教学任务
+	bool __deleteMission(size_t no);						//删除教学任务
 public:
 	bool assignMission();
 	bool deleteMission();
@@ -48,6 +48,5 @@ public:
 	//comparator
 	bool operator<(const Teacher& other);
 
-	void printInfo();
 
 };

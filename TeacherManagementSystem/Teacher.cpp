@@ -152,13 +152,10 @@ bool Teacher::deleteMission()
 		return false;
 	}
 	cout << "删除成功！" << endl;
+	cout << "剩余的教学任务为：" << endl;
+	__listMission();
 	return true;
 }
 
 
 
-void Teacher::printInfo()
-{
-	cout << "[" << m_id << "," << m_name << "," << m_gender << "," << m_post << "]" << endl;
-
-}
