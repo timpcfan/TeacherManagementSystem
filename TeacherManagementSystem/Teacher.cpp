@@ -62,7 +62,7 @@ bool Teacher::__assignMission(TeachingMission & teachingMission)
 	return true;
 }
 
-void Teacher::__printMission()
+void Teacher::__listMission()
 {
 	set<TeachingMission>::iterator it;
 	int count = 1;

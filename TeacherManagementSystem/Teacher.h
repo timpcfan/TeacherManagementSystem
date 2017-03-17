@@ -33,7 +33,7 @@ public:
 private:
 	//TeachingMissionMangement
 	bool __assignMission(TeachingMission &teachingMission);	//分配教学任务
-	void __printMission();									//输出该教师所有教学任务
+	void __listMission();									//输出该教师所有教学任务
 	bool __deleteMission(size_t no);							//删除教学任务
 public:
 	bool assignMission();
