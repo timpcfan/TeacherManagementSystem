@@ -227,8 +227,8 @@ bool Teacher::reviseMission()
 			cout << "请输入要添加的班级名称：";
 			string newClass;
 			cin >> newClass;
-			tmp.setName(newClass);
-			cout << "课程名称已修改为：" << endl;
+			tmp.addClass(newClass);
+			cout << "添加成功，现在的班级有：" << endl;
 			tmp.listClass();
 		}
 		else if (op == "3") {
