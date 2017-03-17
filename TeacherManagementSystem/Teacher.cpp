@@ -148,11 +148,9 @@ bool Teacher::assignMission()
 
 	if (!__assignMission(tm)) {
 		cout << "添加课程失败！" << endl;
-		__printLine();
 		return false;
 	}
 	cout << "添加课程成功！" << endl;
-	__printLine();
 	return true;
 }
 
@@ -174,13 +172,11 @@ bool Teacher::deleteMission()
 	}
 	if (!__deleteMission(no)) {
 		cout << "输入的编号所对应的教学任务不存在！" << endl;
-		__printLine();
 		return false;
 	}
 	cout << "删除成功！" << endl;
 	cout << "剩余的教学任务为：" << endl;
 	__listMission();
-	__printLine();
 	return true;
 }
 
@@ -220,6 +216,7 @@ bool Teacher::reviseMission()
 	TeachingMission tmp(__getMissionAt(no));
 
 	while (true) { //开始修改
+		cout << tmp;
 		__showRevisionMenu();
 		string op;
 		cin >> op;
@@ -278,7 +275,7 @@ bool Teacher::reviseMission()
 			break;
 		}
 		else {
-			cout << "指令输入错误，请重新输入";
+			cout << "指令输入错误，请重新输入!" << endl;
 		}
 	}
 	
@@ -287,19 +284,27 @@ bool Teacher::reviseMission()
 
 	if (!__deleteMission(no)) {
 		cout << "修改失败，无法删除原任务" << endl;
-		__printLine();
 		return false;
 	}
 	if (!__assignMission(tmp)) {
 		cout << "修改失败，无法添加新任务" << endl;
-		__printLine();
 		return false;
 	}
 
 
 	cout << "修改成功！" << endl;
-	__printLine();
 	return true;
+}
+
+void Teacher::displayMission() const
+{
+	cout << "教师"<< m_name <<"一共" << m_missionSet.size() << "节课" << endl;
+
+	set<TeachingMission>::iterator it;
+	for (it = m_missionSet.begin(); it != m_missionSet.end(); it++) {
+		cout << *it;
+	}
+	cout << endl;
 }
 
 

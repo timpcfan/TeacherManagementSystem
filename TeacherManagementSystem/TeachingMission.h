@@ -29,7 +29,7 @@ public:
 	//class management
 	bool addClass(string className);
 	bool deleteClass(string className);
-	void listClass();
+	void listClass() const;
 
 
 	//stream

@@ -35,7 +35,7 @@ public: //临时改公有，测试用
 	bool __assignMission(TeachingMission &teachingMission);			//分配教学任务
 	void __listMission();											//输出该教师所有教学任务
 	bool __deleteMission(unsigned int no);							//删除教学任务
-	void __printLine(int n=40);										//打印分界线
+	void __printLine(int n=50);										//打印分界线
 	bool __reviseMission(unsigned int no);							//修改教学任务
 	const TeachingMission & __getMissionAt(unsigned int no) const;	//获取教学任务对象
 	void __showRevisionMenu();
@@ -43,6 +43,7 @@ public:
 	bool assignMission();
 	bool deleteMission();
 	bool reviseMission();
+	void displayMission() const;
 
 
 
