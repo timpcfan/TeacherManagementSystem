@@ -1,48 +1,48 @@
-#include "TeachingInfo.h"
+#include "TeachingMission.h"
 #include <set>
 
-TeachingInfo::TeachingInfo(string subjectName, double expTime, double praTime)
+TeachingMission::TeachingMission(string subjectName, double expTime, double praTime)
 	:m_subjectName(subjectName),m_expTime(expTime),m_praTime(praTime)
 {
 }
 
-void TeachingInfo::setName(string name)
+void TeachingMission::setName(string name)
 {
 	m_subjectName = name;
 }
 
-string TeachingInfo::getName()
+string TeachingMission::getName() const
 {
 	return m_subjectName;
 }
 
-void TeachingInfo::setExpTime(double time)
+void TeachingMission::setExpTime(double time)
 {
 	m_expTime = time;
 }
 
-double TeachingInfo::getExpTime()
+double TeachingMission::getExpTime() const
 {
 	return m_expTime;
 }
 
-void TeachingInfo::setPraTime(double time)
+void TeachingMission::setPraTime(double time)
 {
 	m_praTime = time;
 }
 
-double TeachingInfo::getPraTime()
+double TeachingMission::getPraTime() const
 {
 	return m_praTime;
 }
 
-int TeachingInfo::getNumOfClasses()
+size_t TeachingMission::getNumOfClasses() const
 {
 	return m_classesSet.size();
 }
 
 //插入班级，插入成功返回true，若已存在同样的班级返回false
-bool TeachingInfo::addClass(string className)
+bool TeachingMission::addClass(string className)
 {
 	if (m_classesSet.find(className) != m_classesSet.end()) return false;
 	m_classesSet.insert(className);
@@ -50,7 +50,7 @@ bool TeachingInfo::addClass(string className)
 }
 
 //删除班级，删除成功返回true，班级不存在返回false
-bool TeachingInfo::deleteClass(string className)
+bool TeachingMission::deleteClass(string className)
 {
 	set<string>::iterator it;
 	it = m_classesSet.find(className);
@@ -59,7 +59,7 @@ bool TeachingInfo::deleteClass(string className)
 	return true;
 }
 
-bool TeachingInfo::operator<(const TeachingInfo & other) const
+bool TeachingMission::operator<(const TeachingMission & other) const
 {
 	return this->m_subjectName < other.m_subjectName;
 }

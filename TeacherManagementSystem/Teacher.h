@@ -2,7 +2,7 @@
 
 #include <string>
 #include <set>
-#include "TeachingInfo.h"
+#include "TeachingMission.h"
 
 using namespace std;
 
@@ -12,32 +12,39 @@ private:
 	string m_name;					//姓名
 	string m_gender;				//性别
 	string m_post;					//职称
-	set<TeachingInfo> m_missionSet;	//教学任务
+	set<TeachingMission> m_missionSet;	//教学任务
 
 
 public:
-	//initation
+	//initalization
 	Teacher(string id,string name,string gender,string post);
 	
 	//setter and getter
-	string getId();
+	string getId() const;
 	void setId(string id);
-	string getName();
+	string getName() const;
 	void setName(string name);
-	string getGender();
+	string getGender() const;
 	void setGender(string gender);
-	string getPost();
+	string getPost() const;
 	void setPost(string post);
 
+
+private:
 	//TeachingMissionMangement
-	bool assignMission(TeachingInfo &teachingInfo);
-	void printMission();
+	bool __assignMission(TeachingMission &teachingMission);	//分配教学任务
+	void __printMission();									//输出该教师所有教学任务
+	bool __deleteMission(size_t no);							//删除教学任务
+public:
+	bool assignMission();
 	bool deleteMission();
+
 
 	//stream
 	friend ostream& operator<<(ostream& out, const Teacher& teacher);
 
 
+public:
 	//comparator
 	bool operator<(const Teacher& other);
 

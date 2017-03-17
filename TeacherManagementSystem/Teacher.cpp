@@ -1,5 +1,7 @@
 #include "Teacher.h"
+#include "TeachingMission.h"
 #include <iostream>
+#include <vector>
 
 using std::cout;
 using std::endl;
@@ -14,7 +16,7 @@ Teacher::Teacher(string id, string name, string gender, string post)
 
 }
 
-string Teacher::getId()
+string Teacher::getId() const
 {
 	return m_id;
 }
@@ -24,7 +26,7 @@ void Teacher::setId(string id)
 	m_id = id;
 }
 
-string Teacher::getName()
+string Teacher::getName() const
 {
 	return m_name;
 }
@@ -34,7 +36,7 @@ void Teacher::setName(string name)
 	m_name = name;
 }
 
-string Teacher::getGender()
+string Teacher::getGender() const
 {
 	return m_gender;
 }
@@ -44,7 +46,7 @@ void Teacher::setGender(string gender)
 	m_gender = gender;
 }
 
-string Teacher::getPost()
+string Teacher::getPost() const
 {
 	return m_post;
 }
@@ -54,11 +56,81 @@ void Teacher::setPost(string post)
 	m_post = post;
 }
 
-bool Teacher::assignMission(TeachingInfo & teachingInfo)
+bool Teacher::__assignMission(TeachingMission & teachingMission)
 {
-	m_missionSet.insert(teachingInfo);
+	m_missionSet.insert(teachingMission);
 	return true;
 }
+
+void Teacher::__printMission()
+{
+	set<TeachingMission>::iterator it;
+	int count = 1;
+	for (it = m_missionSet.begin(); it != m_missionSet.end(); it++, count++) {
+		cout << count << ":" << (*it).getName() << "\t";
+		if (count % 3 == 0) cout << endl;
+	}
+}
+
+bool Teacher::__deleteMission(size_t no)
+{
+	if (no > m_missionSet.size() || no < 1) {
+		return false;
+	}
+	set<TeachingMission>::iterator it;
+	for (size_t i = 1; i < no; i++) it++;
+	m_missionSet.erase(it);
+	return true;
+}
+
+bool Teacher::assignMission()
+{
+	string subjectName;
+	cout << "请输入课程名称：" << endl;
+	cin >> subjectName;
+	int n;
+	cout << "请输入班级数量：" << endl;
+	cin >> n;
+	while (cin.bad() || cin.peek() == '.') { //输入错误处理
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "输入格式错误，请输入整数：";
+		cin >> n;
+	}
+	vector<string> vt;
+	for (int i = 1; i <= n; i++) {
+		string tmp;
+		cout << "请输入第" << i << "个班级：" << endl;
+		cin >> tmp;
+		vt.push_back(tmp);
+	}
+	double expTime, praTime;
+	cout << "请输入实验课时：" << endl;
+	cin >> expTime;
+	while (cin.bad()) { //输入错误处理
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "输入格式错误，请输入数字：";
+		cin >> expTime;
+	}
+	cout << "请输入理论课时：" << endl;
+	cin >> praTime;
+	while (cin.bad()) { //输入错误处理
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "输入格式错误，请输入数字：";
+		cin >> praTime;
+	}
+
+	TeachingMission *tm = new TeachingMission(subjectName, expTime, praTime);
+	for(int i=0;i<n;i++) tm->addClass(vt.at(i));
+
+	if(!__assignMission(*tm)) return false;
+
+	return true;
+}
+
+
 
 void Teacher::printInfo()
 {

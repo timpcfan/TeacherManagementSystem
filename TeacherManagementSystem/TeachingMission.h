@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class TeachingInfo {
+class TeachingMission {
 private:
 	string m_subjectName;		//任教课程
 	set<string> m_classesSet;	//班级
@@ -13,17 +13,17 @@ private:
 	double m_praTime;			//理论课时
 
 public:
-	//initation
-	TeachingInfo(string subjectName,double expTime,double praTime);
+	//initalization
+	TeachingMission(string subjectName,double expTime,double praTime);
 
 	//getter and setter
 	void setName(string name);
-	string getName();
+	string getName() const;
 	void setExpTime(double time);
-	double getExpTime();
+	double getExpTime() const;
 	void setPraTime(double time);
-	double getPraTime();
-	int getNumOfClasses();
+	double getPraTime() const;
+	size_t getNumOfClasses() const;
 
 	//class management
 	bool addClass(string className);
@@ -31,6 +31,6 @@ public:
 
 
 	//comparator
-	bool operator<(const TeachingInfo& other) const;
+	bool operator<(const TeachingMission& other) const;
 
 };

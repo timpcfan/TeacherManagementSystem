@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include "TeacherManagementSystem.h"
 #include "Teacher.h"
-
+#include "TeachingMission.h"
+#include <vector>
 
 using namespace std;
 
@@ -10,11 +12,13 @@ using namespace std;
 int main() {
 	
 
-	TeachingInfo one("chinese",16,32);
-	
-	cout << one.addClass("G4D2") << endl;
-	cout << one.addClass("G4D3") << endl;
-	cout << one.addClass("G4D2") << endl;
+	vector<string> vt;
+	vt.push_back("a");
+	vt.push_back("b");
+	vt.push_back("c");
+	vt.push_back("d");
+	vt.push_back("e");
 
+	cout << vt.at(0) << endl;
 	system("pause");
 }

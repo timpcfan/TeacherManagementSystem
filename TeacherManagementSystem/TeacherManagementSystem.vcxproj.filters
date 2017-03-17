@@ -24,7 +24,7 @@
     <ClCompile Include="TeacherManagementSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TeachingInfo.cpp">
+    <ClCompile Include="TeachingMission.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +32,10 @@
     <ClInclude Include="Teacher.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TeachingInfo.h">
+    <ClInclude Include="TeacherManagementSystem.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TeacherManagementSystem.h">
+    <ClInclude Include="TeachingMission.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

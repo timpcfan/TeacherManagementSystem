@@ -12,6 +12,7 @@ private:
 
 
 public:
+	//initalization
 	TeacherManagementSystem();
 
 	//Æô¶¯ÏµÍ³
@@ -20,5 +21,10 @@ public:
 	//teacher management
 	void addTeacher(Teacher &teacher);
 	void deleteTeacher();
+
+	//Menu
+	void showMainMenu();
+	void showTeacherMenu();
+	void showTeachingInfoMenu();
 
 };
