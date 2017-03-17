@@ -84,8 +84,15 @@ bool Teacher::__deleteMission(size_t no)
 	return true;
 }
 
+void Teacher::__printLine(int n)
+{
+	while (n--) cout << '*';
+	cout << endl;
+}
+
 bool Teacher::assignMission()
 {
+	__printLine(30);
 	string subjectName;
 	cout << "请输入课程名称：";
 	cin >> subjectName;
@@ -128,14 +135,17 @@ bool Teacher::assignMission()
 
 	if (!__assignMission(*tm)) {
 		cout << "添加课程失败！" << endl;
+		__printLine(30);
 		return false;
 	}
 	cout << "添加课程成功！" << endl;
+	__printLine(30);
 	return true;
 }
 
 bool Teacher::deleteMission()
 {
+	__printLine();
 	__listMission();
 	size_t no;
 
@@ -149,11 +159,13 @@ bool Teacher::deleteMission()
 	}
 	if (!__deleteMission(no)) {
 		cout << "输入的编号所对应的教学任务不存在！" << endl;
+		__printLine();
 		return false;
 	}
 	cout << "删除成功！" << endl;
 	cout << "剩余的教学任务为：" << endl;
 	__listMission();
+	__printLine();
 	return true;
 }
 

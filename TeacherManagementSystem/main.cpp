@@ -29,6 +29,8 @@ int main() {
 
 
 	one.deleteMission();
+	one.deleteMission();
+
 
 
 	system("pause");
