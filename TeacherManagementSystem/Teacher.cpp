@@ -70,6 +70,7 @@ void Teacher::__listMission()
 		cout << count << ":" << (*it).getName() << "\t";
 		if (count % 3 == 0) cout << endl;
 	}
+	if(count % 3 != 1) cout << endl;
 }
 
 bool Teacher::__deleteMission(size_t no)
@@ -130,6 +131,24 @@ bool Teacher::assignMission()
 		return false;
 	}
 	cout << "添加课程成功！" << endl;
+	return true;
+}
+
+bool Teacher::deleteMission()
+{
+	__listMission();
+	size_t no;
+	cin >> no;
+	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "输入格式错误，请输入数字：";
+		cin >> no;
+	}
+	if (!__deleteMission(no)) {
+		cout << "输入的编号所对应的教学任务不存在！" << endl;
+		return false;
+	}
 	return true;
 }
 

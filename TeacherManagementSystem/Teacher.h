@@ -30,7 +30,7 @@ public:
 	void setPost(string post);
 
 
-private:
+public: //临时改公有，测试用
 	//TeachingMissionMangement
 	bool __assignMission(TeachingMission &teachingMission);	//分配教学任务
 	void __listMission();									//输出该教师所有教学任务
