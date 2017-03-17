@@ -86,12 +86,12 @@ bool Teacher::__deleteMission(size_t no)
 bool Teacher::assignMission()
 {
 	string subjectName;
-	cout << "请输入课程名称：" << endl;
+	cout << "请输入课程名称：";
 	cin >> subjectName;
 	int n;
-	cout << "请输入班级数量：" << endl;
+	cout << "请输入班级数量：";
 	cin >> n;
-	while (cin.bad() || cin.peek() == '.') { //输入错误处理
+	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
 		cin.clear();
 		while (cin.get() != '\n');
 		cout << "输入格式错误，请输入整数：";
@@ -100,22 +100,22 @@ bool Teacher::assignMission()
 	vector<string> vt;
 	for (int i = 1; i <= n; i++) {
 		string tmp;
-		cout << "请输入第" << i << "个班级：" << endl;
+		cout << "请输入第" << i << "个班级：" ;
 		cin >> tmp;
 		vt.push_back(tmp);
 	}
 	double expTime, praTime;
-	cout << "请输入实验课时：" << endl;
+	cout << "请输入实验课时：" ;
 	cin >> expTime;
-	while (cin.bad()) { //输入错误处理
+	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
 		cin.clear();
 		while (cin.get() != '\n');
 		cout << "输入格式错误，请输入数字：";
 		cin >> expTime;
 	}
-	cout << "请输入理论课时：" << endl;
+	cout << "请输入理论课时：" ;
 	cin >> praTime;
-	while (cin.bad()) { //输入错误处理
+	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
 		cin.clear();
 		while (cin.get() != '\n');
 		cout << "输入格式错误，请输入数字：";
@@ -125,8 +125,11 @@ bool Teacher::assignMission()
 	TeachingMission *tm = new TeachingMission(subjectName, expTime, praTime);
 	for(int i=0;i<n;i++) tm->addClass(vt.at(i));
 
-	if(!__assignMission(*tm)) return false;
-
+	if (!__assignMission(*tm)) {
+		cout << "添加课程失败！" << endl;
+		return false;
+	}
+	cout << "添加课程成功！" << endl;
 	return true;
 }
 
