@@ -73,13 +73,13 @@ void Teacher::__listMission()
 	if(count % 3 != 1) cout << endl;
 }
 
-bool Teacher::__deleteMission(size_t no)
+bool Teacher::__deleteMission(unsigned int no)
 {
 	if (no > m_missionSet.size() || no < 1) {
 		return false;
 	}
 	set<TeachingMission>::iterator it = m_missionSet.begin();
-	for (size_t i = 1; i < no; i++) it++;
+	for (unsigned int i = 1; i < no; i++) it++;
 	m_missionSet.erase(it);
 	return true;
 }
@@ -90,9 +90,17 @@ void Teacher::__printLine(int n)
 	cout << endl;
 }
 
+const TeachingMission & Teacher::__getMissionAt(unsigned int no) const
+{
+	if (no > m_missionSet.size() || no < 1) return TeachingMission();
+	set<TeachingMission>::iterator it = m_missionSet.begin();
+	for (unsigned int i = 1; i < no; i++) it++;
+	return *it;
+}
+
 bool Teacher::assignMission()
 {
-	__printLine(30);
+	__printLine();
 	string subjectName;
 	cout << "请输入课程名称：";
 	cin >> subjectName;
@@ -130,16 +138,19 @@ bool Teacher::assignMission()
 		cin >> praTime;
 	}
 
-	TeachingMission *tm = new TeachingMission(subjectName, expTime, praTime);
-	for(int i=0;i<n;i++) tm->addClass(vt.at(i));
+	//TeachingMission *tm = new TeachingMission(subjectName, expTime, praTime);
+	//for(int i=0;i<n;i++) tm->addClass(vt.at(i));
 
-	if (!__assignMission(*tm)) {
+	TeachingMission tm(subjectName, expTime, praTime);
+	for(int i=0;i<n;i++) tm.addClass(vt.at(i));
+
+	if (!__assignMission(tm)) {
 		cout << "添加课程失败！" << endl;
-		__printLine(30);
+		__printLine();
 		return false;
 	}
 	cout << "添加课程成功！" << endl;
-	__printLine(30);
+	__printLine();
 	return true;
 }
 
@@ -165,6 +176,121 @@ bool Teacher::deleteMission()
 	cout << "删除成功！" << endl;
 	cout << "剩余的教学任务为：" << endl;
 	__listMission();
+	__printLine();
+	return true;
+}
+
+void Teacher::__showRevisionMenu()
+{
+	cout << "请输入要修改的内容编号：" << endl;
+	cout << "1 - 修改课程名称" << endl;
+	cout << "2 - 添加班级" << endl;
+	cout << "3 - 删除班级" << endl;
+	cout << "4 - 修改实验课时" << endl;
+	cout << "5 - 修改理论课时" << endl;
+	cout << "6 - 完成修改" << endl;
+}
+
+
+bool Teacher::reviseMission()
+{
+	__listMission();
+	unsigned int no;
+	cout << "请输入要修改的教学任务编号：";
+	cin >> no;
+	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "输入格式错误，请输入数字：";
+		cin >> no;
+	}
+	if (no > m_missionSet.size() || no < 1) {
+		cout << "没有对应编号的教学任务！" << endl;
+		__printLine();
+		return false;
+	}
+
+	TeachingMission tmp(__getMissionAt(no));
+
+	while (true) { //开始修改
+		__showRevisionMenu();
+		string op;
+		cin >> op;
+		if (op == "1") {
+			cout << "请输入修改后的课程名称：";
+			string newName;
+			cin >> newName;
+			tmp.setName(newName);
+			cout << "课程名称已修改为：" << tmp.getName() << endl;
+		}
+		else if(op == "2"){
+			cout << "请输入要添加的班级名称：";
+			string newClass;
+			cin >> newClass;
+			tmp.setName(newClass);
+			cout << "课程名称已修改为：" << endl;
+			tmp.listClass();
+		}
+		else if (op == "3") {
+			tmp.listClass();
+			cout << "请输入要删除的班级名称：";
+			string classToDelete;
+			cin >> classToDelete;
+			if (!tmp.deleteClass(classToDelete)) cout << "输入的班级不存在！" << endl;
+			else cout << "删除成功！" << endl;
+			cout << "剩余的班级还有：" << endl;
+			tmp.listClass();
+		}
+		else if (op == "4") {
+			double expTime;
+			cout << "请输入修改后的实验课时：";
+			cin >> expTime;
+			while (cin.fail() || cin.peek() != '\n') { //输入错误处理
+				cin.clear();
+				while (cin.get() != '\n');
+				cout << "输入格式错误，请输入数字：";
+				cin >> expTime;
+			}
+			tmp.setExpTime(expTime);
+			cout << "实验课时已修改为：" << tmp.getExpTime() << endl;
+		}
+		else if (op == "5") {
+			double praTime;
+			cout << "请输入修改后的理论课时：";
+			cin >> praTime;
+			while (cin.fail() || cin.peek() != '\n') { //输入错误处理
+				cin.clear();
+				while (cin.get() != '\n');
+				cout << "输入格式错误，请输入数字：";
+				cin >> praTime;
+			}
+			tmp.setPraTime(praTime);
+			cout << "实验课时已修改为：" << tmp.getPraTime() << endl;
+		}
+		else if (op == "6") {
+			break;
+		}
+		else {
+			cout << "指令输入错误，请重新输入";
+		}
+	}
+	
+
+
+
+	if (!__deleteMission(no)) {
+		cout << "修改失败，无法删除原任务" << endl;
+		__printLine();
+		return false;
+	}
+	if (!__assignMission(tmp)) {
+		cout << "修改失败，无法添加新任务" << endl;
+		__printLine();
+		return false;
+	}
+
+
+	cout << "修改成功！" << endl;
 	__printLine();
 	return true;
 }

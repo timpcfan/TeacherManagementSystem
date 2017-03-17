@@ -20,18 +20,23 @@ int main() {
 	TeachingMission f("‘∂π≈ ∑", 20, 60);
 
 
-	one.__assignMission(a);
-	one.__assignMission(b);
-	one.__assignMission(c);
-	one.__assignMission(d);
-	one.__assignMission(e);
-	one.__assignMission(f);
+	//one.__assignMission(a);
+	//one.__assignMission(b);
+	//one.__assignMission(c);
+	//one.__assignMission(d);
+	//one.__assignMission(e);
+	//one.__assignMission(f);
 
+
+	//one.deleteMission();
+	//one.deleteMission();
+	
+	one.assignMission();
+	one.assignMission();
+
+	one.__listMission();
 
 	one.deleteMission();
-	one.deleteMission();
-
-
 
 	system("pause");
 }

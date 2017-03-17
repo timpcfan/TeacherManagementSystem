@@ -1,5 +1,13 @@
 #include "TeachingMission.h"
 #include <set>
+#include <iostream>
+
+using namespace std;
+
+TeachingMission::TeachingMission()
+	:m_subjectName("null"), m_expTime(0), m_praTime(0)
+{
+}
 
 TeachingMission::TeachingMission(string subjectName, double expTime, double praTime)
 	:m_subjectName(subjectName),m_expTime(expTime),m_praTime(praTime)
@@ -57,6 +65,17 @@ bool TeachingMission::deleteClass(string className)
 	if (it == m_classesSet.end()) return false;
 	m_classesSet.erase(it);
 	return true;
+}
+
+void TeachingMission::listClass()
+{
+	set<string>::iterator it = m_classesSet.begin();
+	int count = 1;
+	for (; it != m_classesSet.end(); it++, count++) {
+		cout << *it << " ";
+		if (count % 6 == 0) cout << endl;
+	}
+	if (count % 6 != 1) cout << endl;
 }
 
 bool TeachingMission::operator<(const TeachingMission & other) const

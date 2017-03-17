@@ -14,6 +14,7 @@ private:
 
 public:
 	//initalization
+	TeachingMission();
 	TeachingMission(string subjectName,double expTime,double praTime);
 
 	//getter and setter
@@ -28,6 +29,7 @@ public:
 	//class management
 	bool addClass(string className);
 	bool deleteClass(string className);
+	void listClass();
 
 
 	//comparator
