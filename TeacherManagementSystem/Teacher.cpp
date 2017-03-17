@@ -101,6 +101,8 @@ const TeachingMission & Teacher::__getMissionAt(unsigned int no) const
 bool Teacher::assignMission()
 {
 	__printLine();
+	cout << "添加教学任务" << endl;
+	__printLine();
 	string subjectName;
 	cout << "请输入课程名称：";
 	cin >> subjectName;
@@ -157,6 +159,8 @@ bool Teacher::assignMission()
 bool Teacher::deleteMission()
 {
 	__printLine();
+	cout << "删除教学任务" << endl;
+	__printLine();
 	__listMission();
 	size_t no;
 
@@ -191,10 +195,13 @@ void Teacher::__showRevisionMenu()
 	cout << "6 - 完成修改" << endl;
 }
 
-
 bool Teacher::reviseMission()
 {
+	__printLine();
+	cout << "修改教学任务" << endl;
+	__printLine();
 	__listMission();
+
 	unsigned int no;
 	cout << "请输入要修改的教学任务编号：";
 	cin >> no;
@@ -227,8 +234,8 @@ bool Teacher::reviseMission()
 			cout << "请输入要添加的班级名称：";
 			string newClass;
 			cin >> newClass;
-			tmp.addClass(newClass);
-			cout << "添加成功，现在的班级有：" << endl;
+			if (!tmp.addClass(newClass)) cout << "班级已存在，现在的班级有：" << endl;
+			else cout << "添加成功，现在的班级有：" << endl;
 			tmp.listClass();
 		}
 		else if (op == "3") {

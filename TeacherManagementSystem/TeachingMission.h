@@ -32,6 +32,9 @@ public:
 	void listClass();
 
 
+	//stream
+	friend ostream & operator<<(ostream& out, const TeachingMission& other);
+
 	//comparator
 	bool operator<(const TeachingMission& other) const;
 

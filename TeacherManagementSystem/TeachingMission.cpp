@@ -82,3 +82,15 @@ bool TeachingMission::operator<(const TeachingMission & other) const
 {
 	return this->m_subjectName < other.m_subjectName;
 }
+
+ostream & operator<<(ostream & out, const TeachingMission & other)
+{
+	out << "-----------------------------------------------" << endl;
+	out << "课程名称：" << other.getName() << "，实验课时：" << other.getExpTime()
+		<< "，理论课时：" << other.getPraTime() << "班级数目：" << other.getNumOfClasses()
+		<< endl;
+	out << "班级列表：" << endl;
+	other.listClass;
+	out << "-----------------------------------------------" << endl;
+	return out;
+}
