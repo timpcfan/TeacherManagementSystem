@@ -33,12 +33,8 @@ int main() {
 	//one.deleteMission();
 	//one.deleteMission();
 	
-	one.assignMission();
-	one.assignMission();
-
-	one.__listMission();
-
-	one.deleteMission();
+	one.displayMission();
+	
 
 	system("pause");
 }

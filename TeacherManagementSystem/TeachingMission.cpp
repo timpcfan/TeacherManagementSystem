@@ -69,13 +69,19 @@ bool TeachingMission::deleteClass(string className)
 
 void TeachingMission::listClass() const
 {
+	if (m_classesSet.size() == 0) {
+		cout << "无" << endl;
+		return;
+	}
+
 	set<string>::iterator it = m_classesSet.begin();
 	int count = 1;
 	for (; it != m_classesSet.end(); it++, count++) {
 		cout << *it << " ";
-		if (count % 6 == 0) cout << endl;
+		/*if (count % 6 == 0) cout << endl;*/
 	}
-	if (count % 6 != 1) cout << endl;
+	/*if (count % 6 != 1) cout << endl;*/
+	cout << endl;
 }
 
 bool TeachingMission::operator<(const TeachingMission & other) const
@@ -89,7 +95,7 @@ ostream & operator<<(ostream & out, const TeachingMission & other)
 	out << "课程名称：" << other.getName() << "，实验课时：" << other.getExpTime()
 		<< "，理论课时：" << other.getPraTime() << endl;
 	out	<< "班级数目：" << other.getNumOfClasses() << endl;
-	out << "班级列表：" << endl;
+	out << "班级列表：";
 	other.listClass();
 	out << "-------------------------------------------------" << endl;
 	return out;
