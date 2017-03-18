@@ -1,13 +1,9 @@
 #include "Teacher.h"
 #include "TeachingMission.h"
 #include <iostream>
-#include <vector>
 
 using std::cout;
 using std::endl;
-
-
-
 
 
 Teacher::Teacher()
@@ -127,21 +123,21 @@ bool Teacher::assignMission()
 
 
 	double expTime, praTime;
-	cout << "请输入实验课时：" ;
+	cout << "请输入实验课时：";
 	cin >> expTime;
-	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
+	while (cin.fail() || cin.peek() != '\n' || expTime < 0 || expTime > 200) { //输入错误处理
 		cin.clear();
 		while (cin.get() != '\n');
-		cout << "输入格式错误，请输入数字：";
+		cout << "输入错误，请输入0至200的数字：";
 		cin >> expTime;
 	}
 	cout << "实验课时已成功设置为：" << expTime << endl;
-	cout << "请输入理论课时：" ;
+	cout << "请输入理论课时：";
 	cin >> praTime;
-	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
+	while (cin.fail() || cin.peek() != '\n' || praTime < 0 || praTime > 200) { //输入错误处理
 		cin.clear();
 		while (cin.get() != '\n');
-		cout << "输入格式错误，请输入数字：";
+		cout << "输入错误，请输入0至200数字：";
 		cin >> praTime;
 	}
 	cout << "实验课时已成功设置为：" << praTime << endl;
@@ -151,10 +147,10 @@ bool Teacher::assignMission()
 	int n;
 	cout << "请输入班级数量：";
 	cin >> n;
-	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
+	while (cin.fail() || cin.peek() != '\n' || n < 0 || n > 10) { //输入错误处理
 		cin.clear();
 		while (cin.get() != '\n');
-		cout << "输入格式错误，请输入整数：";
+		cout << "输入错误，请输入小于10的正整数：";
 		cin >> n;
 	}
 	for (int i = 1; i <= n; i++) {
@@ -221,13 +217,13 @@ bool Teacher::deleteMission()
 
 void Teacher::__showRevisionMenu()
 {
-	cout << "请输入要修改的内容编号：";
+	cout << "请输入要修改的内容编号：" << endl;
 	cout << "1 - 修改课程名称" << endl;
 	cout << "2 - 添加班级" << endl;
 	cout << "3 - 删除班级" << endl;
 	cout << "4 - 修改实验课时" << endl;
 	cout << "5 - 修改理论课时" << endl;
-	cout << "6 - 完成修改" << endl;
+	cout << "0 - 完成修改" << endl;
 }
 
 void Teacher::__offset(string text, int offset)
@@ -281,6 +277,8 @@ bool Teacher::reviseMission()
 			cin >> newName;
 			tmp.setName(newName);
 			cout << "课程名称已修改为：" << tmp.getName() << endl;
+			system("pause");
+
 		}
 		else if(op == "2"){
 			cout << "请输入要添加的班级名称：";
@@ -289,6 +287,8 @@ bool Teacher::reviseMission()
 			if (!tmp.addClass(newClass)) cout << "班级已存在，现在的班级有：";
 			else cout << "添加成功，现在的班级有：";
 			tmp.listClass();
+			system("pause");
+
 		}
 		else if (op == "3") {
 			tmp.listClass();
@@ -299,6 +299,7 @@ bool Teacher::reviseMission()
 			else cout << "删除成功！" << endl;
 			cout << "剩余的班级还有：";
 			tmp.listClass();
+			system("pause");
 		}
 		else if (op == "4") {
 			double expTime;
@@ -309,6 +310,8 @@ bool Teacher::reviseMission()
 				while (cin.get() != '\n');
 				cout << "输入格式错误，请输入数字：";
 				cin >> expTime;
+				system("pause");
+
 			}
 			tmp.setExpTime(expTime);
 			cout << "实验课时已修改为：" << tmp.getExpTime() << endl;
@@ -325,8 +328,10 @@ bool Teacher::reviseMission()
 			}
 			tmp.setPraTime(praTime);
 			cout << "实验课时已修改为：" << tmp.getPraTime() << endl;
+			system("pause");
+
 		}
-		else if (op == "6") {
+		else if (op == "0") {
 			break;
 		}
 		else {

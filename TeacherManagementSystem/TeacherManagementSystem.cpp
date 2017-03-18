@@ -204,14 +204,16 @@ bool TeacherManagementSystem::deleteTeacher()
 	__printLine();
 
 	__listTeacher();
-	cout << "请输入要删除的教师id：";
+	cout << "请输入要删除的教师ID：";
 	string id;
 	cin >> id;
 	if (!__deleteTeacher(id)) {
 		cout << "该ID的教师不存在！" << endl;
+		system("pause");
 		return false;
 	}
 	cout << "ID为" << id << "的教师删除成功！" << endl;
+	system("pause");
 	return true;
 }
 

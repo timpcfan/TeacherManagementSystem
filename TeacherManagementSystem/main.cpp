@@ -14,4 +14,5 @@ int main() {
 	tms.start();
 
 	system("pause");
+	return 0;
 }
