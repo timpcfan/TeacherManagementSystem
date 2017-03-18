@@ -28,6 +28,7 @@ public:
 	void setGender(string gender);
 	string getPost() const;
 	void setPost(string post);
+	double getTotalWorkload();
 
 
 public: //临时改公有，测试用
@@ -47,7 +48,7 @@ public:
 
 
 	//stream
-	friend ostream& operator<<(ostream& out, const Teacher& teacher);
+	friend ostream& operator<<(ostream& out, const Teacher& teacher); //TODO
 
 
 public:

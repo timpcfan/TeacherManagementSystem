@@ -56,6 +56,14 @@ void Teacher::setPost(string post)
 	m_post = post;
 }
 
+double Teacher::getTotalWorkload()
+{
+	double ret = 0;
+	set<TeachingMission>::const_iterator it = m_missionSet.begin();
+	for (; it != m_missionSet.end(); it++) ret += it->getTotalClassHour();
+	return ret;
+}
+
 bool Teacher::__assignMission(TeachingMission & teachingMission)
 {
 	m_missionSet.insert(teachingMission);
@@ -312,5 +320,8 @@ bool Teacher::operator<(const Teacher & other)
 	return m_id < other.getId();
 }
 
-
-
+ostream & operator<<(ostream & out, const Teacher & teacher)
+{
+	//TODO
+	return out;
+}

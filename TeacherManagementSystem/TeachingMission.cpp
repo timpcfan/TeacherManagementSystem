@@ -44,9 +44,18 @@ double TeachingMission::getPraTime() const
 	return m_praTime;
 }
 
-size_t TeachingMission::getNumOfClasses() const
+unsigned int TeachingMission::getNumOfClasses() const
 {
 	return m_classesSet.size();
+}
+
+double TeachingMission::getTotalClassHour() const
+{
+	double ret = 0;
+	if (getNumOfClasses() <= 2) ret = 1.5 * (getPraTime() + getExpTime());
+	else if(getNumOfClasses() <= 3) ret = 2 * (getPraTime() + getExpTime());
+	else  ret = 2.5 * (getPraTime() + getExpTime());
+	return ret;
 }
 
 //插入班级，插入成功返回true，若已存在同样的班级返回false

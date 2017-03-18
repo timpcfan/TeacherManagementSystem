@@ -24,7 +24,8 @@ public:
 	double getExpTime() const;
 	void setPraTime(double time);
 	double getPraTime() const;
-	size_t getNumOfClasses() const;
+	unsigned int getNumOfClasses() const;
+	double getTotalClassHour() const;
 
 	//class management
 	bool addClass(string className);
