@@ -10,12 +10,8 @@ using namespace std;
 
 int main() {
 	
-	
-	
-
-
-
-
+	TeacherManagementSystem tms;
+	tms.start();
 
 	system("pause");
 }

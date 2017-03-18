@@ -17,6 +17,7 @@ private:
 
 public:
 	//initalization
+	Teacher();
 	Teacher(string id,string name,string gender,string post);
 	
 	//setter and getter

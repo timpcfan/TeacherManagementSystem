@@ -10,6 +10,10 @@ using std::endl;
 
 
 
+Teacher::Teacher()
+{
+}
+
 Teacher::Teacher(string id, string name, string gender, string post)
 	:m_id(id), m_name(name), m_gender(gender), m_post(post)
 {
