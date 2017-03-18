@@ -39,13 +39,16 @@ void TeacherManagementSystem::start()
 						cout << "请重新输入：";
 						cin >> id;
 					}
+
 					Teacher *p = &(m_teacherMap[id]);
+
 					while (true) {
 						bool back = false;
 						__showTeacherManagementMenu(*p);
 						switch (__waitForRequest(4)) {
 						case 1: {//教学任务管理
 							while (true) {
+								bool back = false;
 								__showTeachingMissionMenu();
 								switch (__waitForRequest(4)) {
 								case 1: {//查看该教师已有教学任务
@@ -86,16 +89,16 @@ void TeacherManagementSystem::start()
 							break;
 						}
 						case 0: {
-
+							back = true;
 							break;
 						}
 						}//switch
-
+							if (back) break;
 					}
 					break;
 				}
 				case 3: {//删除教师
-
+					deleteTeacher();
 					break;
 				}
 				case 4: {//教师工作量统计

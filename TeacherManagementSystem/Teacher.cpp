@@ -164,6 +164,9 @@ bool Teacher::assignMission()
 		return false;
 	}
 	cout << "添加课程成功！" << endl;
+	cout << "教学信息如下：" << endl;
+	cout << tm << endl;
+	system("pause");
 	return true;
 }
 
@@ -173,6 +176,14 @@ bool Teacher::deleteMission()
 	__printLine();
 	cout << "删除教学任务" << endl;
 	__printLine();
+
+	if (m_missionSet.size() == 0) {
+		cout << "没有教学任务！" << endl;
+		system("pause");
+		return false;
+	}
+
+
 	__listMission();
 	size_t no;
 
@@ -205,12 +216,26 @@ void Teacher::__showRevisionMenu()
 	cout << "6 - 完成修改" << endl;
 }
 
+void Teacher::__offset(string text, int offset)
+{
+	for (int i = 0; i < offset; i++) cout << ' ';
+	cout << text << endl;
+}
+
 bool Teacher::reviseMission()
 {
 	system("cls");
 	__printLine();
 	cout << "修改教学任务" << endl;
 	__printLine();
+
+	if (m_missionSet.size() == 0) {
+		cout << "没有教学任务！" << endl;
+		system("pause");
+		return false;
+	}
+
+
 	__listMission();
 
 	unsigned int no;
@@ -308,18 +333,26 @@ bool Teacher::reviseMission()
 
 
 	cout << "修改成功！" << endl;
+	cout << tmp << endl;
+	system("pause");
 	return true;
 }
 
-void Teacher::displayMission() const
+void Teacher::displayMission()
 {
-	cout << "教师"<< m_name <<"一共" << m_missionSet.size() << "节课" << endl;
+	system("cls");
+	__printLine();
+	__offset("详细教学任务清单");
+	__printLine();
+	cout << "           ";
+	cout << m_name << m_post <<"一共有" << m_missionSet.size() << "个教学任务" << endl;
 
 	set<TeachingMission>::iterator it;
 	for (it = m_missionSet.begin(); it != m_missionSet.end(); it++) {
 		cout << *it;
 	}
 	cout << endl;
+	system("pause");
 }
 
 bool Teacher::operator<(const Teacher & other)

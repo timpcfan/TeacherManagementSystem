@@ -40,11 +40,12 @@ private:
 	void __printLine(int n=50);										//打印分界线
 	const TeachingMission & __getMissionAt(unsigned int no) const;	//获取教学任务对象
 	void __showRevisionMenu();
+	void __offset(string text, int offset = 16);
 public:
 	bool assignMission();
 	bool deleteMission();
 	bool reviseMission();
-	void displayMission() const;
+	void displayMission();
 
 
 
