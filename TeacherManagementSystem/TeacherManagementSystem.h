@@ -33,4 +33,6 @@ private:
 	void __listTeacher() const;
 	bool __addTeacher(Teacher &teacher);
 	bool __deleteTeacher(string id);
+	void __printLine(int n = 50);
+	bool __isExisted(string id);
 };
