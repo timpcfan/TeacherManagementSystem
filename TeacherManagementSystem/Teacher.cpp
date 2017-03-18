@@ -358,20 +358,37 @@ bool Teacher::reviseMission()
 	return true;
 }
 
-void Teacher::displayMission()
+void Teacher::__displayMission()
 {
-	system("cls");
-	__printLine();
-	__offset("详细教学任务清单");
-	__printLine();
 	cout << "           ";
-	cout << m_name << m_post <<"一共有" << m_missionSet.size() << "个教学任务" << endl;
+	cout << m_name << m_post << "一共有" << m_missionSet.size() << "个教学任务" << endl;
 
 	set<TeachingMission>::iterator it;
 	for (it = m_missionSet.begin(); it != m_missionSet.end(); it++) {
 		cout << *it;
 	}
 	cout << endl;
+}
+
+void Teacher::displayMission()
+{
+	system("cls");
+	__printLine();
+	__offset("详细教学任务清单");
+	__printLine();
+	__displayMission();
+	system("pause");
+}
+
+void Teacher::showDetailInfo()
+{
+	system("cls");
+	__printLine();
+	__offset(this->getName() + "的详细信息");
+	__printLine();
+	cout << *this << endl;
+	cout << "--------------------------------------------------" << endl;
+	__displayMission();
 	system("pause");
 }
 
@@ -383,8 +400,9 @@ bool Teacher::operator<(const Teacher & other) const
 
 ostream & operator<<(ostream & out, const Teacher & teacher)
 {
-	out << "[" << "ID：" << teacher.getId() << "，姓名：" << teacher.getName()
-		<< "，职称：" << teacher.getPost() << "，总教学工作量：" 
+	out << "[" << "ID:" << teacher.getId() << ",姓名:" << teacher.getName()
+		<< ",性别:" << teacher.getGender()
+		<< ",职称:" << teacher.getPost() << ",总工作量:" 
 		<< teacher.getTotalWorkload() << "]";
 	return out;
 }

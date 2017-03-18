@@ -41,16 +41,18 @@ private:
 	const TeachingMission & __getMissionAt(unsigned int no) const;	//获取教学任务对象
 	void __showRevisionMenu();
 	void __offset(string text, int offset = 16);
+	void __displayMission();
 public:
 	bool assignMission();
 	bool deleteMission();
 	bool reviseMission();
 	void displayMission();
+	void showDetailInfo();
 
 
 
 	//stream
-	friend ostream& operator<<(ostream& out, const Teacher& teacher); //TODO
+	friend ostream& operator<<(ostream& out, const Teacher& teacher);
 
 
 public:

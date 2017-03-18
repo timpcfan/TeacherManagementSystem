@@ -22,7 +22,8 @@ public:
 	bool addTeacher();
 	bool deleteTeacher();
 	void sortAndShowTeacher();
-
+	Teacher * reviseTeacher(Teacher &teacher);
+	void displayWorkingStat();
 
 private:
 	void __listTeacher() const;
@@ -32,11 +33,15 @@ private:
 	bool __isExisted(string id);
 	void __offset(string text, int offset = 16);
 	int __waitForRequest(int max);
+	double __getAllWorkload();
+	pair<double,int> __getMaleWorkloadAndNum();
+	pair<double,int> __getFemaleWorkloadAndNum();
 	
 	//Menu
 	void __showMainMenu();
 	void __showTeacherMenu();
 	void __showTeacherManagementMenu(const Teacher &teacher);
 	void __showTeachingMissionMenu();
+	void __showTeacherRevisionMenu(const Teacher &teacher);
 
 };
