@@ -1,6 +1,6 @@
 #pragma once
 
-#include <set>
+#include <map>
 #include "Teacher.h"
 
 using namespace std;
@@ -8,7 +8,7 @@ using namespace std;
 class TeacherManagementSystem {
 
 private:
-	set<Teacher> m_teacherSet;	//教师集合
+	map<string,Teacher> m_teacherMap;	//教师集合
 
 
 public:
@@ -19,8 +19,8 @@ public:
 	void start();
 
 	//teacher management
-	void addTeacher(Teacher &teacher);
-	void deleteTeacher();
+	bool addTeacher();
+	bool deleteTeacher();
 
 	//Menu
 	void showMainMenu();
@@ -31,4 +31,6 @@ public:
 
 private:
 	void __listTeacher() const;
+	bool __addTeacher(Teacher &teacher);
+	bool __deleteTeacher(string id);
 };
