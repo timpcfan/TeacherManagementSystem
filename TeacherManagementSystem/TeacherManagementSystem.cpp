@@ -66,6 +66,24 @@ bool TeacherManagementSystem::addTeacher()
 	return true;
 }
 
+bool TeacherManagementSystem::deleteTeacher()
+{
+	__printLine();
+	cout << "删除教师" << endl;
+	__printLine();
+
+	__listTeacher();
+	cout << "请输入要删除的教师id：" << endl;
+	string id;
+	cin >> id;
+	if (!__deleteTeacher(id)) {
+		cout << "该ID的教师不存在！" << endl;
+		return false;
+	}
+	cout << "ID为" << id << "的教师删除成功！" << endl;
+	return true;
+}
+
 //添加新教师对象进入集合，成功返回true，若id重复，则返回false
 bool TeacherManagementSystem::__addTeacher(Teacher & teacher)
 {
