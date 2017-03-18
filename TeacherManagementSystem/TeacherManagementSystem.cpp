@@ -19,6 +19,15 @@ bool TeacherManagementSystem::__addTeacher(Teacher & teacher)
 	return true;
 }
 
+//删除教师对象，如果成功返回true，教师id不存在返回false
+bool TeacherManagementSystem::__deleteTeacher(string id)
+{
+	if (m_teacherMap.find(id) == m_teacherMap.end()) return false;
+
+	m_teacherMap.erase(id);
+	return true;
+}
+
 void TeacherManagementSystem::__listTeacher() const
 {
 	if (m_teacherMap.size() == 0) {
