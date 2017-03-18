@@ -39,7 +39,7 @@ private:
 	bool __deleteMission(unsigned int no);							//删除教学任务
 	void __printLine(int n=50);										//打印分界线
 	const TeachingMission & __getMissionAt(unsigned int no) const;	//获取教学任务对象
-	void __showRevisionMenu();
+	void __showRevisionMenu(const TeachingMission &teachingMission);
 	void __offset(string text, int offset = 16);
 	void __displayMission();
 public:

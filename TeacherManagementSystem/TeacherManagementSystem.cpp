@@ -30,18 +30,27 @@ void TeacherManagementSystem::start()
 						system("pause");
 						break;
 					}
+					system("cls");
+					__printLine();
+					__offset("选择教师", 21);
+					__printLine();
 					__listTeacher();
 					cout << "请输入教师ID（返回请输入0）：" ;
 					string id;
 					cin >> id;
-					if (id == "0") break;
 
-					while (!__isExisted(id)) {
+					while (!__isExisted(id) && id != "0") {
+						system("cls");
+						__printLine();
+						__offset("选择教师", 21);
+						__printLine();
 						cout << "ID为" << id << "的教师不存在！" << endl;
 						__listTeacher();
-						cout << "请重新输入：";
+						cout << "请重新输入（返回请输入0）：";
 						cin >> id;
 					}
+					if (id == "0") break;
+
 
 					Teacher *p = &(m_teacherMap[id]);
 
@@ -359,6 +368,8 @@ void TeacherManagementSystem::displayWorkingStat()
 	double ave1 = 0;
 	if (m_teacherMap.size() != 0) ave1 = __getAllWorkload() / m_teacherMap.size();
 	cout << "全体教师平均工作量为：" << ave1 << endl;
+
+	cout << "--------------------------------";
 	pair<double, int> female, male;
 	female = __getFemaleWorkloadAndNum();
 	male = __getMaleWorkloadAndNum();
@@ -367,6 +378,8 @@ void TeacherManagementSystem::displayWorkingStat()
 	double ave2 = 0;
 	if (female.second != 0) ave2 = female.first / female.second;
 	cout << "女教师平均工作量为：" << ave2 << endl;	
+	cout << "--------------------------------";
+
 	cout << "男教师总人数为：" << male.second << endl;
 	cout << "男教师总工作量为：" << male.first << endl;
 	double ave3 = 0;

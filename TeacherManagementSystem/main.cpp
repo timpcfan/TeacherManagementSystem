@@ -1,5 +1,3 @@
-#include <iostream>
-#include <string>
 #include <cstdlib>
 #include "TeacherManagementSystem.h"
 #include "Teacher.h"
