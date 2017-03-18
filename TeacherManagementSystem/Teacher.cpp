@@ -119,6 +119,11 @@ bool Teacher::assignMission()
 	string subjectName;
 	cout << "请输入课程名称：";
 	cin >> subjectName;
+	while (m_missionSet.find(TeachingMission(subjectName, 0, 0)) != m_missionSet.end()) {
+		cout << subjectName << "已经存在，请重新输入课程名称：";
+		cin >> subjectName;
+	}
+
 	int n;
 	cout << "请输入班级数量：";
 	cin >> n;
@@ -187,7 +192,7 @@ bool Teacher::deleteMission()
 	__listMission();
 	size_t no;
 
-	cout << "请输入要删除的教学任务编号：" ;
+	cout << "请输入要删除的教学任务编号（返回请输入0）：" ;
 	cin >> no;
 	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
 		cin.clear();
@@ -195,8 +200,12 @@ bool Teacher::deleteMission()
 		cout << "输入格式错误，请输入数字：";
 		cin >> no;
 	}
+	if (no == 0) {
+		return false;
+	}
 	if (!__deleteMission(no)) {
 		cout << "输入的编号所对应的教学任务不存在！" << endl;
+		system("pause");
 		return false;
 	}
 	cout << "删除成功！" << endl;
@@ -355,9 +364,10 @@ void Teacher::displayMission()
 	system("pause");
 }
 
-bool Teacher::operator<(const Teacher & other)
+bool Teacher::operator<(const Teacher & other) const
 {
-	return m_id < other.getId();
+	if (getTotalWorkload() > other.getTotalWorkload()) return true;
+	return getId() < other.getId();
 }
 
 ostream & operator<<(ostream & out, const Teacher & teacher)

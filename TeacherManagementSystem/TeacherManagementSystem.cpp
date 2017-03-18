@@ -30,9 +30,11 @@ void TeacherManagementSystem::start()
 						break;
 					}
 					__listTeacher();
-					cout << "请输入教师ID：" ;
+					cout << "请输入教师ID（返回请输入0）：" ;
 					string id;
 					cin >> id;
+					if (id == "0") break;
+
 					while (!__isExisted(id)) {
 						cout << "ID为" << id << "的教师不存在！" << endl;
 						__listTeacher();
@@ -106,7 +108,7 @@ void TeacherManagementSystem::start()
 					break;
 				}
 				case 5: {//浏览全体教师信息
-
+					sortAndShowTeacher();
 					break;
 				}
 				case 0: {
@@ -210,6 +212,24 @@ bool TeacherManagementSystem::deleteTeacher()
 	}
 	cout << "ID为" << id << "的教师删除成功！" << endl;
 	return true;
+}
+
+void TeacherManagementSystem::sortAndShowTeacher()
+{
+	system("cls");
+	__printLine();
+	__offset("全体教师信息", 18);
+	__printLine();
+	set<Teacher> teacherInOrder;
+	map<string, Teacher>::const_iterator it = m_teacherMap.begin();
+	for (; it != m_teacherMap.end(); it++) {
+		teacherInOrder.insert(it->second);
+	}
+	set<Teacher>::const_iterator it2 = teacherInOrder.begin();
+	for (; it2 != teacherInOrder.end(); it2++) {
+		cout << *it2 << endl;
+	}
+	system("pause");
 }
 
 void TeacherManagementSystem::__showMainMenu()

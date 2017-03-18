@@ -21,6 +21,7 @@ public:
 	//teacher management
 	bool addTeacher();
 	bool deleteTeacher();
+	void sortAndShowTeacher();
 
 
 private:

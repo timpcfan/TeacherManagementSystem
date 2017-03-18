@@ -55,7 +55,7 @@ public:
 
 public:
 	//comparator
-	bool operator<(const Teacher& other);
+	bool operator<(const Teacher& other) const;
 
 
 };
