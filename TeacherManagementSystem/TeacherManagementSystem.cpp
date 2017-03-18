@@ -20,10 +20,15 @@ void TeacherManagementSystem::start()
 				__showTeacherMenu();
 				switch (__waitForRequest(5)) {
 				case 1:{//录入新教师
-					
+					addTeacher();
 					break;
 				}
 				case 2: {//查询与管理教师
+					if (m_teacherMap.size() == 0) {
+						cout << "请先添加教师！" << endl;
+						system("pause");
+						break;
+					}
 					__listTeacher();
 					cout << "请输入教师ID：" ;
 					string id;
@@ -143,6 +148,7 @@ bool TeacherManagementSystem::addTeacher()
 
 	string gender;
 	cout << "请输入教师性别（男/女）:" << endl;
+	cin >> gender;
 	while (gender != "男" && gender != "女") {
 		cout << "输入错误！" << endl;
 		cout << "请输入“男”或“女”：";
@@ -309,6 +315,7 @@ int TeacherManagementSystem::__waitForRequest(int max)
 
 void TeacherManagementSystem::__listTeacher() const
 {
+	cout << "现有教师如下：" << endl;
 	if (m_teacherMap.size() == 0) {
 		cout << "无" << endl;
 		return;
@@ -317,7 +324,7 @@ void TeacherManagementSystem::__listTeacher() const
 	unsigned int count = 1;
 	map<string,Teacher>::const_iterator it = m_teacherMap.begin();
 	for (; it != m_teacherMap.end(); it++, count++) {
-		cout << it->first << ":" << it->second << "\t";
+		cout << it->first << ":" << it->second.getName() << "\t";
 		if (count % 4 == 0) cout << endl;
 	}
 	if (count % 4 != 1) cout << endl;
