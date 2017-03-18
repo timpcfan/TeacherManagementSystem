@@ -84,6 +84,61 @@ bool TeacherManagementSystem::deleteTeacher()
 	return true;
 }
 
+void TeacherManagementSystem::showMainMenu()
+{
+	__printLine();
+	__offset("欢迎来到教师管理系统");
+	cout << endl;
+	__offset("主菜单",23);
+	cout << endl;
+	__offset("1 - 进入教师管理系统");
+	__offset("0 - 退出系统");
+
+	__printLine();
+	
+}
+
+void TeacherManagementSystem::showTeacherMenu()
+{
+	__printLine();
+	__offset("教师管理菜单",19);
+	cout << endl;
+	__offset("1 - 录入新教师");
+	__offset("2 - 查询与管理教师");
+	__offset("3 - 删除教师");
+	__offset("4 - 教师工作量统计");
+	__offset("5 - 浏览全体教师信息");
+	__offset("0 - 返回上一级菜单");
+	__printLine();
+
+}
+
+void TeacherManagementSystem::showTeacherManagementMenu()
+{
+	__printLine();
+	__offset("教师编辑菜单", 19);
+	cout << endl;
+	__offset("1 - 教学任务管理");
+	__offset("2 - 查看该教师详细信息");
+	__offset("3 - 修改该教师信息");
+	__offset("4 - 删除该教师");
+	__offset("0 - 返回上一级菜单");
+	__printLine();
+}
+
+void TeacherManagementSystem::showTeachingMissionMenu()
+{
+	__printLine();
+	__offset("教学任务管理菜单", 18);
+	cout << endl;
+	__offset("1 - 查看该教师已有的教学任务");
+	__offset("2 - 添加教学任务");
+	__offset("3 - 修改教学任务");
+	__offset("4 - 删除教学任务");
+	__offset("0 - 返回上一级菜单");
+	__printLine();
+}
+
 //添加新教师对象进入集合，成功返回true，若id重复，则返回false
 bool TeacherManagementSystem::__addTeacher(Teacher & teacher)
 {
@@ -115,6 +170,12 @@ bool TeacherManagementSystem::__isExisted(string id)
 {
 	if (m_teacherMap.find(id) == m_teacherMap.end()) return false;
 	return true;
+}
+
+void TeacherManagementSystem::__offset(string text, int offset)
+{
+	for (int i = 0; i < offset; i++) cout << ' ';
+	cout << text << endl;
 }
 
 void TeacherManagementSystem::__listTeacher() const

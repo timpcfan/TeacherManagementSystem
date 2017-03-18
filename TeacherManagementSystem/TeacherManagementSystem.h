@@ -25,7 +25,8 @@ public:
 	//Menu
 	void showMainMenu();
 	void showTeacherMenu();
-	void showTeachingInfoMenu();
+	void showTeacherManagementMenu();
+	void showTeachingMissionMenu();
 
 
 
@@ -35,4 +36,5 @@ private:
 	bool __deleteTeacher(string id);
 	void __printLine(int n = 50);
 	bool __isExisted(string id);
+	void __offset(string text, int offset = 16);
 };
