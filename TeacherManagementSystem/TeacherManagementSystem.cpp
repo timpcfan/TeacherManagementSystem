@@ -314,7 +314,7 @@ void TeacherManagementSystem::__offset(string text, int offset)
 
 int TeacherManagementSystem::__waitForRequest(int max)
 {
-	int ret;
+	int ret, count = 1;
 	cout << "请输入0至" << max << "的指令编号：";
 	cin >> ret;
 	while (cin.fail() || cin.peek() != '\n' || ret < 0 || ret > max) { //输入错误处理
@@ -322,6 +322,8 @@ int TeacherManagementSystem::__waitForRequest(int max)
 		while (cin.get() != '\n');
 		cout << "输入格式错误，请输入0至"<< max << "的整数：";
 		cin >> ret;
+		count++;
+		if (count == 5) return -1;
 	}
 	return ret;
 }
