@@ -28,10 +28,10 @@ public:
 	void setGender(string gender);
 	string getPost() const;
 	void setPost(string post);
-	double getTotalWorkload();
+	double getTotalWorkload() const;
 
 
-public: //临时改公有，测试用
+private:
 	//TeachingMissionMangement
 	bool __assignMission(TeachingMission &teachingMission);			//分配教学任务
 	void __listMission();											//输出该教师所有教学任务

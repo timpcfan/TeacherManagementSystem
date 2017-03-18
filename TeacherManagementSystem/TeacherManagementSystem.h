@@ -22,13 +22,6 @@ public:
 	bool addTeacher();
 	bool deleteTeacher();
 
-	//Menu
-	void showMainMenu();
-	void showTeacherMenu();
-	void showTeacherManagementMenu();
-	void showTeachingMissionMenu();
-
-
 
 private:
 	void __listTeacher() const;
@@ -37,4 +30,12 @@ private:
 	void __printLine(int n = 50);
 	bool __isExisted(string id);
 	void __offset(string text, int offset = 16);
+	int __waitForRequest(int max);
+	
+	//Menu
+	void __showMainMenu();
+	void __showTeacherMenu();
+	void __showTeacherManagementMenu(const Teacher &teacher);
+	void __showTeachingMissionMenu();
+
 };

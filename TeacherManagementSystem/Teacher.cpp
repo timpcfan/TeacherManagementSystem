@@ -56,7 +56,7 @@ void Teacher::setPost(string post)
 	m_post = post;
 }
 
-double Teacher::getTotalWorkload()
+double Teacher::getTotalWorkload() const
 {
 	double ret = 0;
 	set<TeachingMission>::const_iterator it = m_missionSet.begin();
@@ -183,14 +183,14 @@ bool Teacher::deleteMission()
 		return false;
 	}
 	cout << "删除成功！" << endl;
-	cout << "剩余的教学任务为：" << endl;
+	cout << "剩余的教学任务为：";
 	__listMission();
 	return true;
 }
 
 void Teacher::__showRevisionMenu()
 {
-	cout << "请输入要修改的内容编号：" << endl;
+	cout << "请输入要修改的内容编号：";
 	cout << "1 - 修改课程名称" << endl;
 	cout << "2 - 添加班级" << endl;
 	cout << "3 - 删除班级" << endl;
@@ -239,8 +239,8 @@ bool Teacher::reviseMission()
 			cout << "请输入要添加的班级名称：";
 			string newClass;
 			cin >> newClass;
-			if (!tmp.addClass(newClass)) cout << "班级已存在，现在的班级有：" << endl;
-			else cout << "添加成功，现在的班级有：" << endl;
+			if (!tmp.addClass(newClass)) cout << "班级已存在，现在的班级有：";
+			else cout << "添加成功，现在的班级有：";
 			tmp.listClass();
 		}
 		else if (op == "3") {
@@ -250,7 +250,7 @@ bool Teacher::reviseMission()
 			cin >> classToDelete;
 			if (!tmp.deleteClass(classToDelete)) cout << "输入的班级不存在！" << endl;
 			else cout << "删除成功！" << endl;
-			cout << "剩余的班级还有：" << endl;
+			cout << "剩余的班级还有：";
 			tmp.listClass();
 		}
 		else if (op == "4") {
@@ -322,6 +322,8 @@ bool Teacher::operator<(const Teacher & other)
 
 ostream & operator<<(ostream & out, const Teacher & teacher)
 {
-	//TODO
+	out << "[" << "ID：" << teacher.getId() << "，姓名：" << teacher.getName()
+		<< "，职称：" << teacher.getPost() << "，总教学工作量：" 
+		<< teacher.getTotalWorkload() << "]";
 	return out;
 }
