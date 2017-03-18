@@ -144,6 +144,7 @@ bool TeacherManagementSystem::addTeacher()
 	while (__isExisted(id)) {
 		cout << "ID为" << id << "的教师已存在！" << endl;
 		cout << "请重新输入：";
+		cin >> id;
 	}
 	cout << "ID已成功设置为：" << id << endl;
 
@@ -360,8 +361,8 @@ void TeacherManagementSystem::__listTeacher() const
 	map<string,Teacher>::const_iterator it = m_teacherMap.begin();
 	for (; it != m_teacherMap.end(); it++, count++) {
 		cout << it->first << ":" << it->second.getName() << "\t";
-		if (count % 4 == 0) cout << endl;
+		if (count % 3 == 0) cout << endl;
 	}
-	if (count % 4 != 1) cout << endl;
+	if (count % 3 != 1) cout << endl;
 
 }

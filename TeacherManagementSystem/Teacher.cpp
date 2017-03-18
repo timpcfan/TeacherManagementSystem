@@ -123,6 +123,30 @@ bool Teacher::assignMission()
 		cout << subjectName << "已经存在，请重新输入课程名称：";
 		cin >> subjectName;
 	}
+	cout << "课程名称已成功设置为：" << subjectName << endl;
+
+
+	double expTime, praTime;
+	cout << "请输入实验课时：" ;
+	cin >> expTime;
+	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "输入格式错误，请输入数字：";
+		cin >> expTime;
+	}
+	cout << "实验课时已成功设置为：" << expTime << endl;
+	cout << "请输入理论课时：" ;
+	cin >> praTime;
+	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "输入格式错误，请输入数字：";
+		cin >> praTime;
+	}
+	cout << "实验课时已成功设置为：" << praTime << endl;
+
+	TeachingMission tm(subjectName, expTime, praTime);
 
 	int n;
 	cout << "请输入班级数量：";
@@ -133,36 +157,17 @@ bool Teacher::assignMission()
 		cout << "输入格式错误，请输入整数：";
 		cin >> n;
 	}
-	vector<string> vt;
 	for (int i = 1; i <= n; i++) {
 		string tmp;
 		cout << "请输入第" << i << "个班级：" ;
 		cin >> tmp;
-		vt.push_back(tmp);
-	}
-	double expTime, praTime;
-	cout << "请输入实验课时：" ;
-	cin >> expTime;
-	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
-		cin.clear();
-		while (cin.get() != '\n');
-		cout << "输入格式错误，请输入数字：";
-		cin >> expTime;
-	}
-	cout << "请输入理论课时：" ;
-	cin >> praTime;
-	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
-		cin.clear();
-		while (cin.get() != '\n');
-		cout << "输入格式错误，请输入数字：";
-		cin >> praTime;
+		while (!tm.addClass(tmp)) {
+			cout << tmp << "已存在,请重新输入！" << endl;
+			cout << "请输入第" << i << "个班级：";
+			cin >> tmp;
+		}
 	}
 
-	//TeachingMission *tm = new TeachingMission(subjectName, expTime, praTime);
-	//for(int i=0;i<n;i++) tm->addClass(vt.at(i));
-
-	TeachingMission tm(subjectName, expTime, praTime);
-	for(int i=0;i<n;i++) tm.addClass(vt.at(i));
 
 	if (!__assignMission(tm)) {
 		cout << "添加课程失败！" << endl;
@@ -248,7 +253,7 @@ bool Teacher::reviseMission()
 	__listMission();
 
 	unsigned int no;
-	cout << "请输入要修改的教学任务编号：";
+	cout << "请输入要修改的教学任务编号(返回请输入0)：" << endl;
 	cin >> no;
 	while (cin.fail() || cin.peek() != '\n') { //输入错误处理
 		cin.clear();
@@ -256,9 +261,10 @@ bool Teacher::reviseMission()
 		cout << "输入格式错误，请输入数字：";
 		cin >> no;
 	}
+	if (no == 0) return false;
 	if (no > m_missionSet.size() || no < 1) {
 		cout << "没有对应编号的教学任务！" << endl;
-		__printLine();
+		system("pause");
 		return false;
 	}
 
