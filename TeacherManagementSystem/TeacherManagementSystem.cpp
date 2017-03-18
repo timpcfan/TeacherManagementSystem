@@ -133,7 +133,7 @@ bool TeacherManagementSystem::addTeacher()
 {
 	system("cls");
 	__printLine();
-	cout << "添加教师" << endl;
+	__offset("添加教师",21);
 	__printLine();
 
 	string id;
@@ -197,7 +197,7 @@ bool TeacherManagementSystem::deleteTeacher()
 {
 	system("cls");
 	__printLine();
-	cout << "删除教师" << endl;
+	__offset("删除教师", 21);
 	__printLine();
 
 	__listTeacher();

@@ -114,7 +114,7 @@ bool Teacher::assignMission()
 {
 	system("cls");
 	__printLine();
-	cout << "添加教学任务" << endl;
+	__offset("添加教学任务", 18);
 	__printLine();
 	string subjectName;
 	cout << "请输入课程名称：";
@@ -174,7 +174,7 @@ bool Teacher::deleteMission()
 {
 	system("cls");
 	__printLine();
-	cout << "删除教学任务" << endl;
+	__offset("删除教学任务", 18);
 	__printLine();
 
 	if (m_missionSet.size() == 0) {
@@ -226,7 +226,7 @@ bool Teacher::reviseMission()
 {
 	system("cls");
 	__printLine();
-	cout << "修改教学任务" << endl;
+	__offset("修改教学任务", 18);
 	__printLine();
 
 	if (m_missionSet.size() == 0) {
