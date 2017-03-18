@@ -27,4 +27,8 @@ public:
 	void showTeacherMenu();
 	void showTeachingInfoMenu();
 
+
+
+private:
+	void __listTeacher() const;
 };

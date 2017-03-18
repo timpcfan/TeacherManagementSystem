@@ -97,6 +97,6 @@ ostream & operator<<(ostream & out, const TeachingMission & other)
 	out	<< "班级数目：" << other.getNumOfClasses() << endl;
 	out << "班级列表：";
 	other.listClass();
-	out << "-------------------------------------------------" << endl;
+	/*out << "-------------------------------------------------" << endl;*/
 	return out;
 }
