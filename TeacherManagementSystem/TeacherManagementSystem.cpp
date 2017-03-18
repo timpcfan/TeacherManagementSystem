@@ -128,6 +128,7 @@ void TeacherManagementSystem::start()
 
 bool TeacherManagementSystem::addTeacher()
 {
+	system("cls");
 	__printLine();
 	cout << "添加教师" << endl;
 	__printLine();
@@ -147,13 +148,14 @@ bool TeacherManagementSystem::addTeacher()
 	cout << "姓名已成功设置为：" << name << endl;
 
 	string gender;
-	cout << "请输入教师性别（男/女）:" << endl;
+	cout << "请输入教师性别（男/女）：";
 	cin >> gender;
 	while (gender != "男" && gender != "女") {
 		cout << "输入错误！" << endl;
 		cout << "请输入“男”或“女”：";
 		cin >> gender;
 	}
+	cout << "性别已成功设置为：" << gender << endl;
 
 	string post;
 	cout << "请输入职称的编号" << endl;
@@ -165,14 +167,15 @@ bool TeacherManagementSystem::addTeacher()
 		cout << "1-助教，2-讲师，3-副教授，4-教授" << endl;
 		cin >> post;
 	}
-	if (post == "1") post == "助教";
-	else if (post == "2") post == "讲师";
-	else if (post == "3") post == "副教授";
-	else if (post == "4") post == "教授";
+	if (post == "1") post = "助教";
+	else if (post == "2") post = "讲师";
+	else if (post == "3") post = "副教授";
+	else if (post == "4") post = "教授";
 	else {
 		cout << "未知错误！" << endl;
 		return false;
 	}
+	cout << "职称已成功设置为：" << post << endl;
 
 	
 	if (!__addTeacher(Teacher(id, name, gender, post))) {
@@ -181,12 +184,15 @@ bool TeacherManagementSystem::addTeacher()
 	}
 
 	cout << "教师已添加！" << endl;
-	//TODO 添加教师信息显示
+	cout << "教师的信息为：" << endl;
+	cout << m_teacherMap[id] << endl;
+	system("pause");
 	return true;
 }
 
 bool TeacherManagementSystem::deleteTeacher()
 {
+	system("cls");
 	__printLine();
 	cout << "删除教师" << endl;
 	__printLine();
@@ -205,6 +211,7 @@ bool TeacherManagementSystem::deleteTeacher()
 
 void TeacherManagementSystem::__showMainMenu()
 {
+	system("cls");
 	__printLine();
 	__offset("欢迎来到教师管理系统");
 	cout << endl;
@@ -219,6 +226,7 @@ void TeacherManagementSystem::__showMainMenu()
 
 void TeacherManagementSystem::__showTeacherMenu()
 {
+	system("cls");
 	__printLine();
 	__offset("教师管理菜单",19);
 	cout << endl;
@@ -234,6 +242,7 @@ void TeacherManagementSystem::__showTeacherMenu()
 
 void TeacherManagementSystem::__showTeacherManagementMenu(const Teacher & teacher)
 {
+	system("cls");
 	__printLine();
 	__offset("教师编辑菜单", 19);
 	cout << endl;
@@ -249,6 +258,7 @@ void TeacherManagementSystem::__showTeacherManagementMenu(const Teacher & teache
 
 void TeacherManagementSystem::__showTeachingMissionMenu()
 {
+	system("cls");
 	__printLine();
 	__offset("教学任务管理菜单", 18);
 	cout << endl;

@@ -112,6 +112,7 @@ const TeachingMission & Teacher::__getMissionAt(unsigned int no) const
 
 bool Teacher::assignMission()
 {
+	system("cls");
 	__printLine();
 	cout << "添加教学任务" << endl;
 	__printLine();
@@ -168,6 +169,7 @@ bool Teacher::assignMission()
 
 bool Teacher::deleteMission()
 {
+	system("cls");
 	__printLine();
 	cout << "删除教学任务" << endl;
 	__printLine();
@@ -205,6 +207,7 @@ void Teacher::__showRevisionMenu()
 
 bool Teacher::reviseMission()
 {
+	system("cls");
 	__printLine();
 	cout << "修改教学任务" << endl;
 	__printLine();
