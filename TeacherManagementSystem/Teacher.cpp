@@ -307,5 +307,10 @@ void Teacher::displayMission() const
 	cout << endl;
 }
 
+bool Teacher::operator<(const Teacher & other)
+{
+	return m_id < other.getId();
+}
+
 
 
