@@ -2,9 +2,9 @@
 #include "TeachingMission.h"
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 
-using std::cout;
-using std::endl;
+using namespace std;
 
 
 Teacher::Teacher()

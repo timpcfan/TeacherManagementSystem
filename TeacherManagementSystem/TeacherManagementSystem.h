@@ -12,7 +12,7 @@ private:
 
 
 public:
-	//initalization
+	//initialization
 	TeacherManagementSystem();
 
 	//Æô¶¯ÏµÍ³

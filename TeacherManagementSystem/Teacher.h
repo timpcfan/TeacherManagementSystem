@@ -8,15 +8,15 @@ using namespace std;
 
 class Teacher {
 private:
-	string m_id;					//教师号
-	string m_name;					//姓名
-	string m_gender;				//性别
-	string m_post;					//职称
+	string m_id;						//教师号
+	string m_name;						//姓名
+	string m_gender;					//性别
+	string m_post;						//职称
 	set<TeachingMission> m_missionSet;	//教学任务
 
 
 public:
-	//initalization
+	//initialization
 	Teacher();
 	Teacher(string id,string name,string gender,string post);
 	
@@ -33,7 +33,7 @@ public:
 
 
 private:
-	//TeachingMissionMangement
+	//TeachingMissionManagement
 	bool __assignMission(TeachingMission &teachingMission);			//分配教学任务
 	void __listMission();											//输出该教师所有教学任务
 	bool __deleteMission(unsigned int no);							//删除教学任务

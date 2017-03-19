@@ -211,11 +211,17 @@ bool TeacherManagementSystem::addTeacher()
 	}
 	cout << "职称已成功设置为：" << post << endl;
 
-	
+	Teacher t(id, name, gender, post); //为了适应g++编译器。。
 	if (!__addTeacher(Teacher(id, name, gender, post))) {
 		cout << "添加教师失败！" << endl;
 		return false;
 	}
+
+	//下面这代码在vs里面能正常编译，在cb里面会报错，错误信息也挺蠢的。。
+	//if (!__addTeacher(Teacher(id, name, gender, post))) {
+	//	cout << "添加教师失败！" << endl;
+	//	return false;
+	//}
 
 	cout << "教师已添加！" << endl;
 	cout << "教师的信息为：" << endl;
@@ -369,7 +375,7 @@ void TeacherManagementSystem::displayWorkingStat()
 	if (m_teacherMap.size() != 0) ave1 = __getAllWorkload() / m_teacherMap.size();
 	cout << "全体教师平均工作量为：" << ave1 << endl;
 
-	cout << "--------------------------------";
+	cout << "--------------------------------" << endl;
 	pair<double, int> female, male;
 	female = __getFemaleWorkloadAndNum();
 	male = __getMaleWorkloadAndNum();
@@ -378,7 +384,7 @@ void TeacherManagementSystem::displayWorkingStat()
 	double ave2 = 0;
 	if (female.second != 0) ave2 = female.first / female.second;
 	cout << "女教师平均工作量为：" << ave2 << endl;	
-	cout << "--------------------------------";
+	cout << "--------------------------------" << endl;
 
 	cout << "男教师总人数为：" << male.second << endl;
 	cout << "男教师总工作量为：" << male.first << endl;

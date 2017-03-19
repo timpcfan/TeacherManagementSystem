@@ -13,7 +13,7 @@ private:
 	double m_praTime;			//ÀíÂÛ¿ÎÊ±
 
 public:
-	//initalization
+	//initialization
 	TeachingMission();
 	TeachingMission(string subjectName,double expTime,double praTime);
 
