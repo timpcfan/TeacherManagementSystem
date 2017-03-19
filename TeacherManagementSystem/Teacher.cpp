@@ -101,7 +101,10 @@ void Teacher::__printLine(int n)
 
 const TeachingMission & Teacher::__getMissionAt(unsigned int no) const
 {
-	if (no > m_missionSet.size() || no < 1) return TeachingMission();
+	if (no > m_missionSet.size() || no < 1) {
+		TeachingMission *t = new TeachingMission();
+		return *t;
+	}
 	set<TeachingMission>::iterator it = m_missionSet.begin();
 	for (unsigned int i = 1; i < no; i++) it++;
 	return *it;
