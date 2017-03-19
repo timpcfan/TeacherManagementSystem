@@ -25,6 +25,7 @@
     <ClCompile Include="TeachingMission.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Teacher.h" />
     <ClInclude Include="TeacherManagementSystem.h" />
     <ClInclude Include="TeachingMission.h" />

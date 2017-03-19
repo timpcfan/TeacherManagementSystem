@@ -9,7 +9,7 @@ using namespace std;
 int main() {
 	
 	TeacherManagementSystem tms;
-	tms.start();
+	tms.start(); //Æô¶¯ÏµÍ³
 
 	system("pause");
 	return 0;

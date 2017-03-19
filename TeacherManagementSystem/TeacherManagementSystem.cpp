@@ -1,6 +1,7 @@
 #include "TeacherManagementSystem.h"
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ void TeacherManagementSystem::start()
 			while (true) {
 				bool back = false;
 				__showTeacherMenu();
-				switch (__waitForRequest(5)) {
+				switch (__waitForRequest(6)) {
 				case 1:{//录入新教师
 					addTeacher();
 					break;
@@ -137,6 +138,14 @@ void TeacherManagementSystem::start()
 				}
 				case 5: {//浏览全体教师信息
 					sortAndShowTeacher();
+					break;
+				}
+				case 6: {//储存教师信息
+					saveData();
+					break;
+				}
+				case 7: {//储存教师信息
+					loadData();
 					break;
 				}
 				case 0: {
@@ -394,6 +403,22 @@ void TeacherManagementSystem::displayWorkingStat()
 	system("pause");
 }
 
+void TeacherManagementSystem::saveData()
+{
+	fstream file("teacherdata.dat",ios::out | ios::binary);
+
+	file.write((char*)&m_teacherMap, sizeof(map<string, Teacher>));
+
+	file.close();
+}
+
+void TeacherManagementSystem::loadData()
+{
+	fstream file("teacherdata.dat", ios::binary | ios::in);
+	
+
+}
+
 void TeacherManagementSystem::__showMainMenu()
 {
 	system("cls");
@@ -420,6 +445,7 @@ void TeacherManagementSystem::__showTeacherMenu()
 	__offset("3 - 删除教师");
 	__offset("4 - 教师工作量统计");
 	__offset("5 - 浏览全体教师信息");
+	__offset("6 - 储存所有教师数据");
 	__offset("0 - 返回上一级菜单");
 	__printLine();
 
