@@ -24,19 +24,17 @@ public:
 	double getExpTime() const;
 	void setPraTime(double time);
 	double getPraTime() const;
-	unsigned int getNumOfClasses() const;
-	double getTotalClassHour() const;
+	unsigned int getNumOfClasses() const;	//获取班级数量
+	double getTotalClassHour() const;		//计算并返回单个教学任务总课时
 
 	//class management
-	bool addClass(string className);
-	bool deleteClass(string className);
-	void listClass() const;
+	bool addClass(string className);	//添加班级
+	bool deleteClass(string className);	//删除班级
+	void listClass() const;				//列出班级并分配序号
 
-
-	//stream
-	friend ostream & operator<<(ostream& out, const TeachingMission& other);
-
+public:
 	//comparator
-	bool operator<(const TeachingMission& other) const;
-
+	bool operator<(const TeachingMission& other) const;	// <运算符重载
+	//stream
+	friend ostream & operator<<(ostream& out, const TeachingMission& other);// <<运算符重载
 };

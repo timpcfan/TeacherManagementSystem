@@ -87,9 +87,9 @@ void TeachingMission::listClass() const
 	int count = 1;
 	for (; it != m_classesSet.end(); it++, count++) {
 		cout << *it << " ";
-		/*if (count % 6 == 0) cout << endl;*/
+		/*if (count % 5 == 0) cout << endl;*/
 	}
-	/*if (count % 6 != 1) cout << endl;*/
+	/*if (count % 5 != 1) cout << endl;*/
 	cout << endl;
 }
 
