@@ -2,13 +2,24 @@
 
 #include <map>
 #include "Teacher.h"
+#include <boost\serialization\access.hpp>
+#include <boost\serialization\map.hpp>
+
 
 using namespace std;
 
 class TeacherManagementSystem {
 
 private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int) {
+		ar & m_teacherMap;
+	}
+
+private:
 	map<string,Teacher> m_teacherMap;	//教师集合
+
 
 public:
 	//initialization

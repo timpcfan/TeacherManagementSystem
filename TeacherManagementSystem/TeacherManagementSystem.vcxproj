@@ -29,6 +29,7 @@
     <ClInclude Include="Teacher.h" />
     <ClInclude Include="TeacherManagementSystem.h" />
     <ClInclude Include="TeachingMission.h" />
+    <ClInclude Include="test.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EAF4C971-3458-47DD-AEFE-5F3605EAC1AD}</ProjectGuid>
@@ -86,6 +87,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
