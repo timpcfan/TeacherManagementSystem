@@ -4,9 +4,22 @@
 #include <set>
 #include "TeachingMission.h"
 
+#include <boost\serialization\access.hpp>
+#include <boost\serialization\set.hpp>
+#include <boost\serialization\string.hpp>
+
 using namespace std;
 
 class Teacher {
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int) {
+		ar & m_missionSet;
+		ar & m_id & m_name & m_gender & m_post;
+	}
+
 private:
 	string m_id;						//ΩÃ ¶∫≈
 	string m_name;						//–’√˚

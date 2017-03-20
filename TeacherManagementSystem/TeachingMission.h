@@ -3,9 +3,24 @@
 #include <string>
 #include <set>
 
+#include <boost\serialization\access.hpp>
+#include <boost\serialization\set.hpp>
+#include <boost\serialization\string.hpp>
+
 using namespace std;
 
 class TeachingMission {
+
+private:
+	friend class boost::serialization::access;
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int) {
+		ar & m_classesSet;
+		ar & m_subjectName;
+		ar & m_expTime & m_praTime;
+	}
+
+
 private:
 	string m_subjectName;		//任教课程
 	set<string> m_classesSet;	//班级

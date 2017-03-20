@@ -4,7 +4,7 @@
 #include "TeacherManagementSystem.h"
 #include "Teacher.h"
 #include "TeachingMission.h"
-#include "test.h"
+#include "SeriializationAndStore.h"
 
 #include <boost\archive\text_iarchive.hpp>
 #include <boost\archive\text_oarchive.hpp>
@@ -18,7 +18,7 @@ int main() {
 
 	TeacherManagementSystem tms;
 	
-	//restore(tms, "testfile");
+	restore(tms, "testfile");
 
 	tms.start(); //Æô¶¯ÏµÍ³
 
