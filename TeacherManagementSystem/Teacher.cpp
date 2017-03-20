@@ -404,7 +404,9 @@ void Teacher::showDetailInfo()
 bool Teacher::operator<(const Teacher & other) const
 {
 	if (getTotalWorkload() > other.getTotalWorkload()) return true;
-	return getId() < other.getId();
+	else if (getTotalWorkload() < other.getTotalWorkload()) return false;
+	else return getId() < other.getId();
+	//return getTotalWorkload() > other.getTotalWorkload();
 }
 
 ostream & operator<<(ostream & out, const Teacher & teacher)

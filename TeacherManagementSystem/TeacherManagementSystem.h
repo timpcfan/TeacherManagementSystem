@@ -35,8 +35,6 @@ public:
 	void sortAndShowTeacher();					//排序并显示教师
 	Teacher * reviseTeacher(Teacher &teacher);	//修改教师
 	void displayWorkingStat();					//显示工作量统计信息
-	void saveData();
-	void loadData();
 
 private:
 	void __listTeacher() const;						//排列显示教师
