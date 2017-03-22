@@ -12,7 +12,7 @@ using namespace std;
 
 class Teacher {
 
-private:
+private://这段是对象序列化的代码，将各个数据成员存档
 	friend class boost::serialization::access;
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int) {

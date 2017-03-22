@@ -11,7 +11,7 @@ using namespace std;
 
 class TeacherManagementSystem {
 
-private:
+private://这段是对象序列化的代码，将teacherMap存档
 	friend class boost::serialization::access;
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int) {
