@@ -38,5 +38,14 @@
     <ClInclude Include="TeachingMission.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MyList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyOrderedList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDisorderedList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

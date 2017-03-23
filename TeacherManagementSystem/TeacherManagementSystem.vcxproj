@@ -25,6 +25,9 @@
     <ClCompile Include="TeachingMission.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyDisorderedList.h" />
+    <ClInclude Include="MyList.h" />
+    <ClInclude Include="MyOrderedList.h" />
     <ClInclude Include="Teacher.h" />
     <ClInclude Include="TeacherManagementSystem.h" />
     <ClInclude Include="TeachingMission.h" />
@@ -86,6 +89,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <Link>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
