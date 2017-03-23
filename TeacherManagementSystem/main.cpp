@@ -4,6 +4,8 @@
 #include "TeachingMission.h"
 #include "MyDisorderedList.h"
 #include "MyOrderedList.h"
+#include <ctime>
+
 using namespace std;
 
 
@@ -13,17 +15,19 @@ int main() {
 	//tms.start();
 
 
-	MyDisorderedList<int> L;
+	int arr[10] = { 100,8,7,6,5,4,3,3,120,1 };
 
-	for (int i = 1; i < 1000; i++) {
-		L.insert(L.size()+1,i);
+	MyOrderedList<int> l(arr,10);
+	MyDisorderedList<int> dl(arr, 10);
+
+	for (unsigned i = 1; i <= l.size(); i++) {
+		cout << l.get(i) << " ";
+	}	
+	cout << endl;
+	for (unsigned i = 1; i <= dl.size(); i++) {
+		cout << dl.get(i) << " ";
 	}
-
-
-	for (unsigned i = 1;!L.empty(); i++) L.erase(i);
-	for (unsigned i = 1; i < L.size(); i++) cout << L.get(i) << endl;
-
-
+	cout << endl;
 
 	system("pause");
 	return 0;

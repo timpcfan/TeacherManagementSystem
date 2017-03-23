@@ -7,6 +7,7 @@ class MyDisorderedList : public MyList<T> {
 
 public:
 	MyDisorderedList();
+	MyDisorderedList(T arr[], size_t n);
 	virtual ~MyDisorderedList();
 
 	bool insert(unsigned pos, T element);
@@ -18,6 +19,14 @@ public:
 template<typename T>
 inline MyDisorderedList<T>::MyDisorderedList()
 {
+}
+
+template<typename T>
+inline MyDisorderedList<T>::MyDisorderedList(T arr[], size_t n)
+{
+	for (size_t i = 0; i < n; i++) {
+		push_back(arr[i]);
+	}
 }
 
 template<typename T>
