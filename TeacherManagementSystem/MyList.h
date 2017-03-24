@@ -101,6 +101,7 @@ void MyList<T>::clear()
 	}
 	head = nullptr;
 	tail = nullptr;
+	length = 0;
 }
 
 template<typename T>

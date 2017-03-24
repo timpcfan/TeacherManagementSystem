@@ -64,15 +64,15 @@ void TeacherManagementSystem::start()
 								__showTeachingMissionMenu();
 								switch (__waitForRequest(4)) {
 								case 1: {//查看该教师已有教学任务
-									p->displayMission();
+									p->displayTask();
 									break;
 								}
 								case 2: {//添加教学任务
-									p->assignMission();
+									p->assignTask();
 									break;
 								}
 								case 3: {//修改教学任务
-									p->reviseMission();
+									p->reviseTask();
 									break;
 								}
 								case 4: {//删除教学任务

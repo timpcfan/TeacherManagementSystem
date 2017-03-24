@@ -14,8 +14,8 @@ class MyIterator {
 
 private:
 	LNode<T> *ptr;
-	MyIterator();
 public:
+	MyIterator();
 	MyIterator(LNode<T> *p);
 	T & operator*() const;
 	void operator++(int);
