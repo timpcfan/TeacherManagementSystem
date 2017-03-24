@@ -16,6 +16,7 @@ protected:
 	//无头结点，只有头指针
 public:
 	MyList();
+	MyList(const MyList & ml);
 	virtual ~MyList();
 
 	bool isExist(T element) const;
@@ -35,6 +36,34 @@ template<typename T>
 MyList<T>::MyList()
 	:head(nullptr), tail(nullptr), length(0)
 {
+}
+
+template<typename T>
+inline MyList<T>::MyList(const MyList & ml)
+{
+	length = ml.length;
+
+	if (!length) return;
+
+	LNode<T> *newList = new LNode<T>;//有头结点
+	newList->next = nullptr;
+	
+	LNode<T> *p = newList, *s = nullptr;
+
+	MyIterator<T> it;
+	for (it = ml.begin(); it != ml.end(); it++) {
+		s = new LNode<T>;
+		s->data = *it;
+		s->next = nullptr;
+		p->next = s;
+		p = s;
+	}
+
+	tail = p;
+	head = newList->next;
+
+	delete newList;
+
 }
 
 template<typename T>
