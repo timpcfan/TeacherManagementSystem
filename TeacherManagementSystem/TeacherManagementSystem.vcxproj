@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyDisorderedList.h" />
+    <ClInclude Include="MyIterator.h" />
     <ClInclude Include="MyList.h" />
     <ClInclude Include="MyOrderedList.h" />
     <ClInclude Include="Teacher.h" />

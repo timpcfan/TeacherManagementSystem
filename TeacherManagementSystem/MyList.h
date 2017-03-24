@@ -1,13 +1,8 @@
 #pragma once
 
-#include <iostream>
 #include <cassert>
+#include "MyIterator.h"
 
-template <typename T>
-struct LNode{
-	T data;
-	LNode *next;
-};
 
 
 template <typename T>
@@ -31,6 +26,8 @@ public:
 	T getFirst();
 	T getLast();
 	T get(unsigned pos);	//[1:length]
+	MyIterator<T> begin();
+	MyIterator<T> end();
 };
 
 
@@ -129,4 +126,16 @@ inline T MyList<T>::get(unsigned pos)
 		p = p->next;
 	}
 	return p->data;
+}
+
+template<typename T>
+inline MyIterator<T> MyList<T>::begin()
+{
+	return MyIterator<T>(head);
+}
+
+template<typename T>
+inline MyIterator<T> MyList<T>::end()
+{
+	return MyIterator<T>(nullptr);
 }

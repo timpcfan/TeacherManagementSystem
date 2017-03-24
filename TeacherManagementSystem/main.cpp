@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iostream>
 #include "TeacherManagementSystem.h"
 #include "Teacher.h"
 #include "TeachingMission.h"
@@ -15,19 +16,10 @@ int main() {
 	//tms.start();
 
 
-	int arr[10] = { 100,8,7,6,5,4,3,3,120,1 };
+	int arr[6] = { 6,9,3,4,5,6 };
 
-	MyOrderedList<int> l(arr,10);
-	MyDisorderedList<int> dl(arr, 10);
+	MyOrderedList<int> l(arr, 6);
 
-	for (unsigned i = 1; i <= l.size(); i++) {
-		cout << l.get(i) << " ";
-	}	
-	cout << endl;
-	for (unsigned i = 1; i <= dl.size(); i++) {
-		cout << dl.get(i) << " ";
-	}
-	cout << endl;
 
 	system("pause");
 	return 0;
