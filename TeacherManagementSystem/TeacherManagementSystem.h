@@ -7,21 +7,21 @@ using namespace std;
 class TeacherManagementSystem {
 
 private:
-	MyDisorderedList<Teacher> m_teacherList;	//教师链表
+	MyDisorderedList<Teacher> m_teacherList;		//教师链表
 
 public:
 	//initialization
 	TeacherManagementSystem();
 
 	//启动系统
-	void start();	//主启动函数
+	void start();									//主启动函数
 
 	//主要功能函数
-	bool addTeacher();							//添加教师
-	bool deleteTeacher();						//删除教师
-	void sortAndShowTeacher();					//排序并显示教师
-	Teacher * reviseTeacher(Teacher &teacher);	//修改教师
-	void displayWorkingStat();					//显示工作量统计信息
+	bool addTeacher();								//添加教师
+	bool deleteTeacher();							//删除教师
+	void sortAndShowTeacher();						//排序并显示教师
+	void displayWorkingStat();						//显示工作量统计信息
+	void reviseTeacher(Teacher *p);					//修改教师信息
 
 private:
 	void __listTeacher() const;						//排列显示教师
@@ -41,5 +41,4 @@ private:
 	void __showTeacherMenu();									//显示教师管理菜单
 	void __showTeacherManagementMenu(const Teacher &teacher);	//显示教师编辑菜单
 	void __showTeachingMissionMenu();							//显示教学任务管理菜单
-	void __showTeacherRevisionMenu(const Teacher &teacher);		//显示教师修改菜单
 };

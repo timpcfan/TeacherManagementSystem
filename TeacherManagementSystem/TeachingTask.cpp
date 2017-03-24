@@ -94,6 +94,11 @@ bool TeachingTask::operator<(const TeachingTask & other) const
 	return this->m_subjectName < other.m_subjectName;
 }
 
+bool TeachingTask::operator==(const TeachingTask & other) const
+{
+	return this->m_subjectName == other.m_subjectName;
+}
+
 ostream & operator<<(ostream & out, const TeachingTask & other)
 {
 	out << "-------------------------------------------------" << endl;

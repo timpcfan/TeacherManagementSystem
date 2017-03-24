@@ -60,22 +60,22 @@ void Teacher::setPost(string post)
 double Teacher::getTotalWorkload() const
 {
 	double ret = 0;
-	set<TeachingTask>::const_iterator it = m_taskSet.begin();
-	for (; it != m_taskSet.end(); it++) ret += it->getTotalClassHour();
+	MyIterator<TeachingTask> it = m_taskList.begin();
+	for (; it != m_taskList.end(); it++) ret += it->getTotalClassHour();
 	return ret;
 }
 
 bool Teacher::__assignMission(TeachingTask & teachingTask)
 {
-	m_taskSet.insert(teachingTask);
+	m_taskList.push_back(teachingTask);
 	return true;
 }
 
 void Teacher::__listTask()
 {
-	set<TeachingTask>::iterator it;
+	MyIterator<TeachingTask> it;
 	int count = 1;
-	for (it = m_taskSet.begin(); it != m_taskSet.end(); it++, count++) {
+	for (it = m_taskList.begin(); it != m_taskList.end(); it++, count++) {
 		cout << count << ":" << (*it).getName() << "\t";
 		if (count % 3 == 0) cout << endl;
 	}
@@ -84,12 +84,12 @@ void Teacher::__listTask()
 
 bool Teacher::__deleteTask(unsigned int no)
 {
-	if (no > m_taskSet.size() || no < 1) {
+	if (no > m_taskList.size() || no < 1) {
 		return false;
 	}
-	set<TeachingTask>::iterator it = m_taskSet.begin();
+	MyIterator<TeachingTask> it = m_taskList.begin();
 	for (unsigned int i = 1; i < no; i++) it++;
-	m_taskSet.erase(it);
+	m_taskList.erase(*it);
 	return true;
 }
 
@@ -99,15 +99,13 @@ void Teacher::__printLine(int n)
 	cout << endl;
 }
 
-const TeachingTask & Teacher::__getTaskAt(unsigned int no) const
+TeachingTask * Teacher::__getTaskAt(unsigned no)
 {
-	if (no > m_taskSet.size() || no < 1) {
-		TeachingTask *t = new TeachingTask();
-		return *t;
-	}
-	set<TeachingTask>::iterator it = m_taskSet.begin();
-	for (unsigned int i = 1; i < no; i++) it++;
-	return *it;
+	assert(no <= m_taskList.size() && no >= 1);
+
+	MyIterator<TeachingTask> it = m_taskList.begin();
+	for (unsigned i = 1; i < no; i++) it++;
+	return &(*it);
 }
 
 bool Teacher::assignTask()
@@ -119,7 +117,7 @@ bool Teacher::assignTask()
 	string subjectName;
 	cout << "请输入课程名称：";
 	cin >> subjectName;
-	while (m_taskSet.find(TeachingTask(subjectName, 0, 0)) != m_taskSet.end()) {
+	while (m_taskList.contains(TeachingTask(subjectName, 0, 0))) {
 		cout << subjectName << "已经存在，请重新输入课程名称：";
 		cin >> subjectName;
 	}
@@ -188,7 +186,7 @@ bool Teacher::deleteMission()
 	__offset("删除教学任务", 18);
 	__printLine();
 
-	if (m_taskSet.size() == 0) {
+	if (m_taskList.size() == 0) {
 		cout << "没有教学任务！" << endl;
 		system("pause");
 		return false;
@@ -220,7 +218,7 @@ bool Teacher::deleteMission()
 	return true;
 }
 
-void Teacher::__showRevisionMenu(const TeachingTask & teachingMission)
+void Teacher::__showTaskRevisionMenu(const TeachingTask & teachingMission)
 {
 	system("cls");
 	__printLine();
@@ -249,12 +247,11 @@ bool Teacher::reviseTask()
 	__offset("修改教学任务", 18);
 	__printLine();
 
-	if (m_taskSet.size() == 0) {
+	if (m_taskList.size() == 0) {
 		cout << "没有教学任务！" << endl;
 		system("pause");
 		return false;
 	}
-
 
 	__listTask();
 
@@ -268,16 +265,16 @@ bool Teacher::reviseTask()
 		cin >> no;
 	}
 	if (no == 0) return false;
-	if (no > m_taskSet.size() || no < 1) {
+	if (no > m_taskList.size() || no < 1) {
 		cout << "没有对应编号的教学任务！" << endl;
 		system("pause");
 		return false;
 	}
 
-	TeachingTask *tmp = new TeachingTask(__getTaskAt(no));
+	TeachingTask *tmp = __getTaskAt(no);
 
 	while (true) { //开始修改
-		__showRevisionMenu(*tmp);
+		__showTaskRevisionMenu(*tmp);
 		cout << "请输入要修改的编号：";
 		string op;
 		cin >> op;
@@ -349,20 +346,9 @@ bool Teacher::reviseTask()
 		}
 	}
 	
-
-
-
-	if (!__deleteTask(no)) {
-		cout << "修改失败，无法删除原任务" << endl;
-		return false;
-	}
-	if (!__assignMission(*tmp)) {
-		cout << "修改失败，无法添加新任务" << endl;
-		return false;
-	}
-
 	system("cls");
 	cout << "修改成功！" << endl;
+	cout << "修改后的信息为：" << endl;
 	cout << *tmp << endl;
 	system("pause");
 	return true;
@@ -371,13 +357,47 @@ bool Teacher::reviseTask()
 void Teacher::__displayTask()
 {
 	cout << "           ";
-	cout << m_name << m_post << "一共有" << m_taskSet.size() << "个教学任务" << endl;
+	cout << m_name << m_post << "一共有" << m_taskList.size() << "个教学任务" << endl;
 
-	set<TeachingTask>::iterator it;
-	for (it = m_taskSet.begin(); it != m_taskSet.end(); it++) {
+	MyIterator<TeachingTask> it;
+	for (it = m_taskList.begin(); it != m_taskList.end(); it++) {
 		cout << *it;
 	}
 	cout << endl;
+}
+
+
+void Teacher::showTeacherRevisionMenu()
+{
+	system("cls");
+	__printLine();
+	__offset("教师信息修改菜单");
+	cout << endl;
+	cout << *this << endl;
+	cout << "请输入要修改的内容编号：" << endl;
+	__offset("1 - ID");
+	__offset("2 - 姓名");
+	__offset("3 - 性别");
+	__offset("4 - 职称");
+	__offset("0 - 完成修改");
+	__printLine();
+
+}
+
+int Teacher::__waitForRequest(int max)
+{
+	int ret, count = 1;
+	cout << "请输入0至" << max << "的指令编号：";
+	cin >> ret;
+	while (cin.fail() || cin.peek() != '\n' || ret < 0 || ret > max) { //输入错误处理
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "输入格式错误，请输入0至" << max << "的整数：";
+		cin >> ret;
+		count++;
+		if (count == 5) return -1;
+	}
+	return ret;
 }
 
 void Teacher::displayTask()
@@ -405,7 +425,12 @@ void Teacher::showDetailInfo()
 bool Teacher::operator<(const Teacher & other) const
 {
 	if (getTotalWorkload() > other.getTotalWorkload()) return true;
-	return getId() < other.getId();
+	return false;
+}
+
+bool Teacher::operator==(const Teacher & other) const
+{
+	return getId() == other.getId();
 }
 
 ostream & operator<<(ostream & out, const Teacher & teacher)

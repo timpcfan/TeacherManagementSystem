@@ -11,6 +11,18 @@ TeacherManagementSystem::TeacherManagementSystem()
 
 void TeacherManagementSystem::start()
 {
+	//Test//
+
+	__addTeacher(Teacher("1", "test", "男", "教授"));
+	__addTeacher(Teacher("2", "test2", "男", "教授"));
+	__addTeacher(Teacher("3", "test3", "男", "教授"));
+	__addTeacher(Teacher("4", "test4", "女", "教授"));
+	__addTeacher(Teacher("5", "test5", "女", "教授"));
+	__addTeacher(Teacher("6", "test6", "女", "教授"));
+
+
+	//Test//
+
 	while (true) {
 		bool back = false;
 		__showMainMenu();
@@ -39,7 +51,9 @@ void TeacherManagementSystem::start()
 					string id;
 					cin >> id;
 
-					while (!__isExisted(id) && id != "0") {
+					Teacher *p;
+
+					while (!(p=__getTeacherById(id)) && id != "0") {
 						system("cls");
 						__printLine();
 						__offset("选择教师", 21);
@@ -51,8 +65,6 @@ void TeacherManagementSystem::start()
 					}
 					if (id == "0") break;
 
-
-					Teacher *p = __getTeacherById(id);
 
 					while (true) {
 						bool back = false;
@@ -93,7 +105,7 @@ void TeacherManagementSystem::start()
 							break;
 						}
 						case 3: {//修改该教师信息
-							p = reviseTeacher(*p);
+							reviseTeacher(p);
 							break;
 						}
 						case 4: {//删除该教师
@@ -211,23 +223,96 @@ bool TeacherManagementSystem::addTeacher()
 	}
 	cout << "职称已成功设置为：" << post << endl;
 
-	Teacher t(id, name, gender, post); //为了适应g++编译器。。
-	if (!__addTeacher(Teacher(id, name, gender, post))) {
+	Teacher *t = new Teacher(id, name, gender, post); 
+	if (!__addTeacher(*t)) {
 		cout << "添加教师失败！" << endl;
 		return false;
 	}
 
-	//下面这代码在vs里面能正常编译，在cb里面会报错，错误信息也挺蠢的。。
-	//if (!__addTeacher(Teacher(id, name, gender, post))) {
-	//	cout << "添加教师失败！" << endl;
-	//	return false;
-	//}
-
 	cout << "教师已添加！" << endl;
 	cout << "教师的信息为：" << endl;
-	cout << m_teacherList[id] << endl;
+	cout << *__getTeacherById(id) << endl;
 	system("pause");
 	return true;
+}
+
+void TeacherManagementSystem::reviseTeacher(Teacher *teacher)
+{
+	while (true) {
+		bool back = false;
+		teacher->showTeacherRevisionMenu();
+		switch (__waitForRequest(4)) {
+		case 1: {//ID
+			string id;
+			cout << "请输入新ID：";
+			cin >> id;
+			while (__isExisted(id)) {
+				cout << "输入的ID已存在！请重新输入" << endl;
+				cout << "请输入新ID：";
+				cin >> id;
+			}
+			teacher->setId(id);
+			cout << "已成功修改ID为：" << id << endl;
+			system("pause");
+			break;
+		}
+		case 2: {//姓名
+			string name;
+			cout << "请输入新姓名：";
+			cin >> name;
+			teacher->setName(name);
+			cout << "已成功修改姓名为：" << name << endl;
+			system("pause");
+			break;
+		}
+		case 3: {//性别
+			string gender;
+			cout << "请输入新性别（男/女）：";
+			cin >> gender;
+			while (gender != "男" && gender != "女") {
+				cout << "输入错误！请重新输入" << endl;
+				cout << "请输入新性别（男/女）：";
+				cin >> gender;
+			}
+			teacher->setGender(gender);
+			cout << "已成功修改性别为：" << gender << endl;
+			system("pause");
+			break;
+		}
+		case 4: {//职称
+			string post;
+			cout << "请输入新职称的编号" << endl;
+			cout << "1-助教，2-讲师，3-副教授，4-教授" << endl;
+			cin >> post;
+			while (post != "1" && post != "2" && post != "3" && post != "4") {
+				cout << "输入错误！" << endl;
+				cout << "请输入整数1至4" << endl;
+				cout << "1-助教，2-讲师，3-副教授，4-教授" << endl;
+				cin >> post;
+			}
+			if (post == "1") post = "助教";
+			else if (post == "2") post = "讲师";
+			else if (post == "3") post = "副教授";
+			else if (post == "4") post = "教授";
+			else {
+				cout << "未知错误！" << endl;
+				break;
+			}
+			teacher->setPost(post);
+			cout << "已成功修改职称为：" << post << endl;
+			break;
+		}
+		case 0: {
+			back = true;
+			break;
+		}
+		}//switch
+		if (back) break;
+	}
+	system("cls");
+	cout << "已完成修改,现在该教师信息如下：" << endl;
+	cout << *teacher << endl;
+	system("pause");
 }
 
 bool TeacherManagementSystem::deleteTeacher()
@@ -270,99 +355,19 @@ void TeacherManagementSystem::sortAndShowTeacher()
 		return;
 	}
 
-	set<Teacher> teacherInOrder;
-	map<string, Teacher>::const_iterator it = m_teacherMap.begin();
+	MyOrderedList<Teacher> teacherInOrder;
+	MyIterator<Teacher> it = m_teacherList.begin();
 	for (; it != m_teacherList.end(); it++) {
-		teacherInOrder.insert(it->second);
+		teacherInOrder.insert(*it);
 	}
-	set<Teacher>::const_iterator it2 = teacherInOrder.begin();
+	MyIterator<Teacher> it2 = teacherInOrder.begin();
 	for (; it2 != teacherInOrder.end(); it2++) {
 		cout << *it2 << endl;
 	}
 	system("pause");
 }
 
-Teacher * TeacherManagementSystem::reviseTeacher(Teacher &teacher)
-{
-	while (true) {
-		bool back = false;
-		__showTeacherRevisionMenu(teacher);
-		switch (__waitForRequest(4)) {
-		case 1: {//ID
-			string preId = teacher.getId();
-			string id;
-			cout << "请输入新ID：";
-			cin >> id;
-			while (m_teacherList.find(id) != m_teacherList.end()) {
-				cout << "输入的ID已存在！请重新输入" << endl;
-				cout << "请输入新ID：";
-				cin >> id;
-			}
-			teacher.setId(id);
-			m_teacherList[id] = Teacher(teacher);
-			__deleteTeacher(preId);
-			cout << "已成功修改ID为：" << id << endl;
-			system("pause");
-			return &(m_teacherList[id]);
-		}
-		case 2: {//姓名
-			string name;
-			cout << "请输入新姓名：";
-			cin >> name;
-			teacher.setName(name);
-			cout << "已成功修改姓名为：" << name << endl;
-			system("pause");
-			break;
-		}
-		case 3: {//性别
-			string gender;
-			cout << "请输入新性别（男/女）：";
-			cin >> gender;
-			while (gender != "男" && gender != "女") {
-				cout << "输入错误！请重新输入" << endl;
-				cout << "请输入新性别（男/女）：";
-				cin >> gender;
-			}
-			teacher.setGender(gender);
-			cout << "已成功修改性别为：" << gender << endl;
-			system("pause");
-			break;
-		}
-		case 4: {//职称
-			string post;
-			cout << "请输入新职称的编号" << endl;
-			cout << "1-助教，2-讲师，3-副教授，4-教授" << endl;
-			cin >> post;
-			while (post != "1" && post != "2" && post != "3" && post != "4") {
-				cout << "输入错误！" << endl;
-				cout << "请输入整数1至4" << endl;
-				cout << "1-助教，2-讲师，3-副教授，4-教授" << endl;
-				cin >> post;
-			}
-			if (post == "1") post = "助教";
-			else if (post == "2") post = "讲师";
-			else if (post == "3") post = "副教授";
-			else if (post == "4") post = "教授";
-			else {
-				cout << "未知错误！" << endl;
-				break;
-			}
-			teacher.setPost(post);
-			cout << "已成功修改职称为：" << post << endl;
-			break;
-		}
-		case 0: {
-			back = true;
-			break;
-		}
-		}//switch
-		if (back) break;
-	}
-	cout << "已完成修改,现在该教师信息如下：" << endl;
-	cout << teacher << endl;
-	system("pause");
-	return &teacher;
-}
+
 
 void TeacherManagementSystem::displayWorkingStat()
 {
@@ -456,23 +461,6 @@ void TeacherManagementSystem::__showTeachingMissionMenu()
 	__printLine();
 }
 
-void TeacherManagementSystem::__showTeacherRevisionMenu(const Teacher & teacher)
-{
-	system("cls");
-	__printLine();
-	__offset("教师信息修改菜单");
-	cout << endl;
-	cout << teacher << endl;
-	cout << "请输入要修改的内容编号：" << endl;
-	__offset("1 - ID");
-	__offset("2 - 姓名"); 
-	__offset("3 - 性别"); 
-	__offset("4 - 职称"); 
-	__offset("0 - 完成修改"); 
-	__printLine();
-
-}
-
 //添加新教师对象进入集合，成功返回true，若id重复，则返回false
 bool TeacherManagementSystem::__addTeacher(Teacher & teacher)
 {
@@ -480,16 +468,16 @@ bool TeacherManagementSystem::__addTeacher(Teacher & teacher)
 
 	if (__isExisted(id)) return false;
 	
-	m_teacherList.insert(make_pair(id,teacher));
+	m_teacherList.push_back(teacher);
 	return true;
 }
 
 //删除教师对象，如果成功返回true，教师id不存在返回false
 bool TeacherManagementSystem::__deleteTeacher(string id)
 {
-	if (!__isExisted(id)) return false;
-
-	m_teacherList.erase(id);
+	Teacher* tmp;
+	if (!(tmp=__getTeacherById(id))) return false;
+	m_teacherList.erase(*tmp);
 	return true;
 }
 
@@ -502,7 +490,7 @@ void TeacherManagementSystem::__printLine(int n)
 //如果id已存在返回true，否则返回false
 bool TeacherManagementSystem::__isExisted(string id)
 {
-	if (m_teacherList.find(id) == m_teacherList.end()) return false;
+	if (!__getTeacherById(id)) return false;
 	return true;
 }
 
@@ -531,9 +519,9 @@ int TeacherManagementSystem::__waitForRequest(int max)
 double TeacherManagementSystem::__getAllWorkload()
 {
 	double ret = 0;
-	map<string, Teacher>::const_iterator it = m_teacherMap.begin();
+	MyIterator<Teacher> it = m_teacherList.begin();
 	for (; it != m_teacherList.end(); it++) {
-		ret += it->second.getTotalWorkload();
+		ret += it->getTotalWorkload();
 	}
 
 	return ret;
@@ -543,10 +531,10 @@ pair<double,int> TeacherManagementSystem::__getMaleWorkloadAndNum()
 {
 	double ret = 0;
 	int count = 0;
-	map<string, Teacher>::const_iterator it = m_teacherMap.begin();
+	MyIterator<Teacher> it = m_teacherList.begin();
 	for (; it != m_teacherList.end(); it++) {
-		if (it->second.getGender() == "男") {
-			ret += it->second.getTotalWorkload();
+		if (it->getGender() == "男") {
+			ret += it->getTotalWorkload();
 			count++;
 		}
 	}
@@ -558,10 +546,10 @@ pair<double,int> TeacherManagementSystem::__getFemaleWorkloadAndNum()
 {
 	double ret = 0;
 	int count = 0;
-	map<string, Teacher>::const_iterator it = m_teacherMap.begin();
+	MyIterator<Teacher> it = m_teacherList.begin();
 	for (; it != m_teacherList.end(); it++) {
-		if (it->second.getGender() == "女") {
-			ret += it->second.getTotalWorkload();
+		if (it->getGender() == "女") {
+			ret += it->getTotalWorkload();
 			count++;
 		}
 	}
@@ -571,7 +559,12 @@ pair<double,int> TeacherManagementSystem::__getFemaleWorkloadAndNum()
 
 Teacher * TeacherManagementSystem::__getTeacherById(string id)
 {
-	m_teacherList.
+	MyIterator<Teacher> it = m_teacherList.begin();
+	for (; it != m_teacherList.end(); it++) {
+		if (it->getId() == id) {
+			return &(*it);
+		}
+	}
 	return nullptr;
 }
 
@@ -584,9 +577,9 @@ void TeacherManagementSystem::__listTeacher() const
 	}
 
 	unsigned int count = 1;
-	map<string,Teacher>::const_iterator it = m_teacherMap.begin();
+	MyIterator<Teacher> it = m_teacherList.begin();
 	for (; it != m_teacherList.end(); it++, count++) {
-		cout << it->first << ":" << it->second.getName() << "\t";
+		cout << it->getId() << ":" << it->getName() << "\t";
 		if (count % 3 == 0) cout << endl;
 	}
 	if (count % 3 != 1) cout << endl;

@@ -44,8 +44,12 @@ inline MyList<T>::MyList(const MyList & ml)
 {
 	length = ml.length;
 
-	if (!length) return;
-
+	if (!length || !head || !tail) {
+		head = nullptr;
+		tail = nullptr;
+		length = 0;
+		return;
+	}
 	LNode<T> *newList = new LNode<T>;//有头结点
 	newList->next = nullptr;
 	
@@ -70,7 +74,7 @@ inline MyList<T>::MyList(const MyList & ml)
 template<typename T>
 MyList<T>::~MyList()
 {
-	clear();
+	//clear();
 }
 
 
@@ -101,12 +105,12 @@ template<typename T>
 bool MyList<T>::erase(T element)
 {
 	LNode<T> *p = head, *prior = nullptr;
-	while (p && p->data != element) {
+	while (p && !(p->data == element)) {
 		prior = p;
 		p = p->next;
 	}
 	if (!p) return false;
-	if (p->data != element) return false;
+	if (!(p->data == element)) return false;
 
 	if (p == head) head = p->next; //当要删除的元素为第一个的时候，将头指针指向p的下一个
 	else prior->next = p->next;

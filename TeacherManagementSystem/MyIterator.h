@@ -18,6 +18,7 @@ public:
 	MyIterator();
 	MyIterator(LNode<T> *p);
 	T & operator*() const;
+	T * operator->() const;
 	void operator++(int);
 	bool operator==(const MyIterator & other) const;
 	bool operator!=(const MyIterator & other) const;
@@ -40,6 +41,13 @@ inline T & MyIterator<T>::operator*() const
 {
 	assert(ptr);
 	return ptr->data;
+}
+
+template<typename T>
+inline T * MyIterator<T>::operator->() const
+{
+	assert(ptr);
+	return &ptr->data;
 }
 
 template<typename T>
