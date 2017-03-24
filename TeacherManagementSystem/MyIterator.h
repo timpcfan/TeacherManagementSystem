@@ -14,8 +14,8 @@ class MyIterator {
 
 private:
 	LNode<T> *ptr;
-public:
 	MyIterator();
+public:
 	MyIterator(LNode<T> *p);
 	T & operator*() const;
 	void operator++(int);
@@ -38,12 +38,14 @@ inline MyIterator<T>::MyIterator(LNode<T>* p)
 template<typename T>
 inline T & MyIterator<T>::operator*() const
 {
+	assert(ptr);
 	return ptr->data;
 }
 
 template<typename T>
 inline void MyIterator<T>::operator++(int)
 {
+	assert(ptr);
 	ptr = ptr->next;
 }
 
