@@ -18,16 +18,16 @@ public:
 	MyList();
 	virtual ~MyList();
 
-	bool isExist(T element);
-	bool empty();
-	size_t size();
+	bool isExist(T element) const;
+	bool empty() const;
+	size_t size() const;
 	bool erase(T element);	//删除第一个与element相等的结点
 	void clear();
-	T getFirst();
-	T getLast();
-	T get(unsigned pos);	//[1:length]
-	MyIterator<T> begin();
-	MyIterator<T> end();
+	T getFirst() const;
+	T getLast() const;
+	T get(unsigned pos) const;	//[1:length]
+	MyIterator<T> begin() const;
+	MyIterator<T> end() const;
 };
 
 
@@ -45,7 +45,7 @@ MyList<T>::~MyList()
 
 
 template<typename T>
-bool MyList<T>::isExist(T element)
+bool MyList<T>::isExist(T element) const
 {
 	LNode<T> *p = head;
 	while (p) {
@@ -56,13 +56,13 @@ bool MyList<T>::isExist(T element)
 }
 
 template<typename T>
-bool MyList<T>::empty()
+bool MyList<T>::empty() const
 {
 	return !length;
 }
 
 template<typename T>
-size_t MyList<T>::size()
+size_t MyList<T>::size() const
 {
 	return length;
 }
@@ -104,19 +104,19 @@ void MyList<T>::clear()
 }
 
 template<typename T>
-inline T MyList<T>::getFirst()
+inline T MyList<T>::getFirst() const
 {
 	return head->data;
 }
 
 template<typename T>
-T MyList<T>::getLast()
+T MyList<T>::getLast() const
 {
 	return tail->data;
 }
 
 template<typename T>
-inline T MyList<T>::get(unsigned pos)
+inline T MyList<T>::get(unsigned pos) const
 {
 	assert(pos >= 1 && pos <= length);
 
@@ -129,13 +129,13 @@ inline T MyList<T>::get(unsigned pos)
 }
 
 template<typename T>
-inline MyIterator<T> MyList<T>::begin()
+inline MyIterator<T> MyList<T>::begin() const
 {
 	return MyIterator<T>(head);
 }
 
 template<typename T>
-inline MyIterator<T> MyList<T>::end()
+inline MyIterator<T> MyList<T>::end() const
 {
 	return MyIterator<T>(nullptr);
 }

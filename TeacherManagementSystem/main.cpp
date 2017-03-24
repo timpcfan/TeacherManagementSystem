@@ -12,8 +12,8 @@ using namespace std;
 
 int main() {
 	
-	//TeacherManagementSystem tms;
-	//tms.start();
+	TeacherManagementSystem tms;
+	tms.start();
 
 
 

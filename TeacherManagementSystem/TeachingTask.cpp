@@ -1,55 +1,54 @@
-#include "TeachingMission.h"
-#include <set>
+#include "TeachingTask.h"
 #include <iostream>
 
 using namespace std;
 
-TeachingMission::TeachingMission()
+TeachingTask::TeachingTask()
 	:m_subjectName("null"), m_expTime(0), m_praTime(0)
 {
 }
 
-TeachingMission::TeachingMission(string subjectName, double expTime, double praTime)
+TeachingTask::TeachingTask(string subjectName, double expTime, double praTime)
 	:m_subjectName(subjectName),m_expTime(expTime),m_praTime(praTime)
 {
 }
 
-void TeachingMission::setName(string name)
+void TeachingTask::setName(string name)
 {
 	m_subjectName = name;
 }
 
-string TeachingMission::getName() const
+string TeachingTask::getName() const
 {
 	return m_subjectName;
 }
 
-void TeachingMission::setExpTime(double time)
+void TeachingTask::setExpTime(double time)
 {
 	m_expTime = time;
 }
 
-double TeachingMission::getExpTime() const
+double TeachingTask::getExpTime() const
 {
 	return m_expTime;
 }
 
-void TeachingMission::setPraTime(double time)
+void TeachingTask::setPraTime(double time)
 {
 	m_praTime = time;
 }
 
-double TeachingMission::getPraTime() const
+double TeachingTask::getPraTime() const
 {
 	return m_praTime;
 }
 
-unsigned int TeachingMission::getNumOfClasses() const
+unsigned TeachingTask::getNumOfClasses() const
 {
-	return m_classesSet.size();
+	return m_classesList.size();
 }
 
-double TeachingMission::getTotalClassHour() const
+double TeachingTask::getTotalClassHour() const
 {
 	double ret = 0;
 	if (getNumOfClasses() <= 2) ret = 1.5 * (getPraTime() + getExpTime());
@@ -59,33 +58,33 @@ double TeachingMission::getTotalClassHour() const
 }
 
 //插入班级，插入成功返回true，若已存在同样的班级返回false
-bool TeachingMission::addClass(string className)
+bool TeachingTask::addClass(string className)
 {
-	if (m_classesSet.find(className) != m_classesSet.end()) return false;
-	m_classesSet.insert(className);
+	if (m_classesList.find(className) != m_classesList.end()) return false;
+	m_classesList.insert(className);
 	return true;
 }
 
 //删除班级，删除成功返回true，班级不存在返回false
-bool TeachingMission::deleteClass(string className)
+bool TeachingTask::deleteClass(string className)
 {
 	set<string>::iterator it;
-	it = m_classesSet.find(className);
-	if (it == m_classesSet.end()) return false;
-	m_classesSet.erase(it);
+	it = m_classesList.find(className);
+	if (it == m_classesList.end()) return false;
+	m_classesList.erase(it);
 	return true;
 }
 
-void TeachingMission::listClass() const
+void TeachingTask::listClass() const
 {
-	if (m_classesSet.size() == 0) {
+	if (m_classesList.size() == 0) {
 		cout << "无" << endl;
 		return;
 	}
 
 	set<string>::iterator it = m_classesSet.begin();
 	int count = 1;
-	for (; it != m_classesSet.end(); it++, count++) {
+	for (; it != m_classesList.end(); it++, count++) {
 		cout << *it << " ";
 		/*if (count % 5 == 0) cout << endl;*/
 	}
@@ -93,12 +92,12 @@ void TeachingMission::listClass() const
 	cout << endl;
 }
 
-bool TeachingMission::operator<(const TeachingMission & other) const
+bool TeachingTask::operator<(const TeachingTask & other) const
 {
 	return this->m_subjectName < other.m_subjectName;
 }
 
-ostream & operator<<(ostream & out, const TeachingMission & other)
+ostream & operator<<(ostream & out, const TeachingTask & other)
 {
 	out << "-------------------------------------------------" << endl;
 	out << "课程名称：" << other.getName() << "，实验课时：" << other.getExpTime()

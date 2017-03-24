@@ -1,21 +1,21 @@
 #pragma once
 
 #include <string>
-#include <set>
+#include "MyOrderedList.h"
 
 using namespace std;
 
-class TeachingMission {
+class TeachingTask {
 private:
 	string m_subjectName;		//任教课程
-	set<string> m_classesSet;	//班级
+	MyOrderedList<string> m_classesList;	//班级
 	double m_expTime;			//实验课时
 	double m_praTime;			//理论课时
 
 public:
 	//initialization
-	TeachingMission();
-	TeachingMission(string subjectName,double expTime,double praTime);
+	TeachingTask();
+	TeachingTask(string subjectName,double expTime,double praTime);
 
 	//getter and setter
 	void setName(string name);
@@ -34,7 +34,7 @@ public:
 
 public:
 	//comparator
-	bool operator<(const TeachingMission& other) const;	// <运算符重载
+	bool operator<(const TeachingTask& other) const;	// <运算符重载
 	//stream
-	friend ostream & operator<<(ostream& out, const TeachingMission& other);// <<运算符重载
+	friend ostream & operator<<(ostream& out, const TeachingTask& other);// <<运算符重载
 };

@@ -266,6 +266,7 @@ void TeacherManagementSystem::sortAndShowTeacher()
 
 	if (m_teacherMap.size() == 0) {
 		cout << "无教师信息" << endl;
+		system("pause");
 		return;
 	}
 
