@@ -25,7 +25,7 @@ void TeacherManagementSystem::start()
 					break;
 				}
 				case 2: {//查询与管理教师
-					if (m_teacherMap.size() == 0) {
+					if (m_teacherList.size() == 0) {
 						cout << "请先添加教师！" << endl;
 						system("pause");
 						break;
@@ -52,7 +52,7 @@ void TeacherManagementSystem::start()
 					if (id == "0") break;
 
 
-					Teacher *p = &(m_teacherMap[id]);
+					Teacher *p = __getTeacherById(id);
 
 					while (true) {
 						bool back = false;
@@ -225,7 +225,7 @@ bool TeacherManagementSystem::addTeacher()
 
 	cout << "教师已添加！" << endl;
 	cout << "教师的信息为：" << endl;
-	cout << m_teacherMap[id] << endl;
+	cout << m_teacherList[id] << endl;
 	system("pause");
 	return true;
 }
@@ -237,7 +237,7 @@ bool TeacherManagementSystem::deleteTeacher()
 	__offset("删除教师", 21);
 	__printLine();
 
-	if (m_teacherMap.size() == 0) {
+	if (m_teacherList.size() == 0) {
 		cout << "请先添加教师！" << endl;
 		system("pause");
 		return false;
@@ -264,7 +264,7 @@ void TeacherManagementSystem::sortAndShowTeacher()
 	__offset("全体教师信息", 18);
 	__printLine();
 
-	if (m_teacherMap.size() == 0) {
+	if (m_teacherList.size() == 0) {
 		cout << "无教师信息" << endl;
 		system("pause");
 		return;
@@ -272,7 +272,7 @@ void TeacherManagementSystem::sortAndShowTeacher()
 
 	set<Teacher> teacherInOrder;
 	map<string, Teacher>::const_iterator it = m_teacherMap.begin();
-	for (; it != m_teacherMap.end(); it++) {
+	for (; it != m_teacherList.end(); it++) {
 		teacherInOrder.insert(it->second);
 	}
 	set<Teacher>::const_iterator it2 = teacherInOrder.begin();
@@ -293,17 +293,17 @@ Teacher * TeacherManagementSystem::reviseTeacher(Teacher &teacher)
 			string id;
 			cout << "请输入新ID：";
 			cin >> id;
-			while (m_teacherMap.find(id) != m_teacherMap.end()) {
+			while (m_teacherList.find(id) != m_teacherList.end()) {
 				cout << "输入的ID已存在！请重新输入" << endl;
 				cout << "请输入新ID：";
 				cin >> id;
 			}
 			teacher.setId(id);
-			m_teacherMap[id] = Teacher(teacher);
+			m_teacherList[id] = Teacher(teacher);
 			__deleteTeacher(preId);
 			cout << "已成功修改ID为：" << id << endl;
 			system("pause");
-			return &(m_teacherMap[id]);
+			return &(m_teacherList[id]);
 		}
 		case 2: {//姓名
 			string name;
@@ -370,10 +370,10 @@ void TeacherManagementSystem::displayWorkingStat()
 	__printLine();
 	__offset("教师工作量统计");
 	__printLine();
-	cout << "教师总人数为：" << m_teacherMap.size() << endl;
+	cout << "教师总人数为：" << m_teacherList.size() << endl;
 	cout << "全体教师总工作量为：" << __getAllWorkload() << endl;
 	double ave1 = 0;
-	if (m_teacherMap.size() != 0) ave1 = __getAllWorkload() / m_teacherMap.size();
+	if (m_teacherList.size() != 0) ave1 = __getAllWorkload() / m_teacherList.size();
 	cout << "全体教师平均工作量为：" << ave1 << endl;
 
 	cout << "--------------------------------" << endl;
@@ -480,7 +480,7 @@ bool TeacherManagementSystem::__addTeacher(Teacher & teacher)
 
 	if (__isExisted(id)) return false;
 	
-	m_teacherMap.insert(make_pair(id,teacher));
+	m_teacherList.insert(make_pair(id,teacher));
 	return true;
 }
 
@@ -489,7 +489,7 @@ bool TeacherManagementSystem::__deleteTeacher(string id)
 {
 	if (!__isExisted(id)) return false;
 
-	m_teacherMap.erase(id);
+	m_teacherList.erase(id);
 	return true;
 }
 
@@ -502,7 +502,7 @@ void TeacherManagementSystem::__printLine(int n)
 //如果id已存在返回true，否则返回false
 bool TeacherManagementSystem::__isExisted(string id)
 {
-	if (m_teacherMap.find(id) == m_teacherMap.end()) return false;
+	if (m_teacherList.find(id) == m_teacherList.end()) return false;
 	return true;
 }
 
@@ -532,7 +532,7 @@ double TeacherManagementSystem::__getAllWorkload()
 {
 	double ret = 0;
 	map<string, Teacher>::const_iterator it = m_teacherMap.begin();
-	for (; it != m_teacherMap.end(); it++) {
+	for (; it != m_teacherList.end(); it++) {
 		ret += it->second.getTotalWorkload();
 	}
 
@@ -544,7 +544,7 @@ pair<double,int> TeacherManagementSystem::__getMaleWorkloadAndNum()
 	double ret = 0;
 	int count = 0;
 	map<string, Teacher>::const_iterator it = m_teacherMap.begin();
-	for (; it != m_teacherMap.end(); it++) {
+	for (; it != m_teacherList.end(); it++) {
 		if (it->second.getGender() == "男") {
 			ret += it->second.getTotalWorkload();
 			count++;
@@ -559,7 +559,7 @@ pair<double,int> TeacherManagementSystem::__getFemaleWorkloadAndNum()
 	double ret = 0;
 	int count = 0;
 	map<string, Teacher>::const_iterator it = m_teacherMap.begin();
-	for (; it != m_teacherMap.end(); it++) {
+	for (; it != m_teacherList.end(); it++) {
 		if (it->second.getGender() == "女") {
 			ret += it->second.getTotalWorkload();
 			count++;
@@ -569,17 +569,23 @@ pair<double,int> TeacherManagementSystem::__getFemaleWorkloadAndNum()
 	return make_pair(ret, count);
 }
 
+Teacher * TeacherManagementSystem::__getTeacherById(string id)
+{
+	m_teacherList.
+	return nullptr;
+}
+
 void TeacherManagementSystem::__listTeacher() const
 {
 	cout << "现有教师如下：" << endl;
-	if (m_teacherMap.size() == 0) {
+	if (m_teacherList.size() == 0) {
 		cout << "无" << endl;
 		return;
 	}
 
 	unsigned int count = 1;
 	map<string,Teacher>::const_iterator it = m_teacherMap.begin();
-	for (; it != m_teacherMap.end(); it++, count++) {
+	for (; it != m_teacherList.end(); it++, count++) {
 		cout << it->first << ":" << it->second.getName() << "\t";
 		if (count % 3 == 0) cout << endl;
 	}

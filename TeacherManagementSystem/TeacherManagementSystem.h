@@ -1,6 +1,5 @@
 #pragma once
-
-#include <map>
+#include "MyDisorderedList.h"
 #include "Teacher.h"
 
 using namespace std;
@@ -8,7 +7,7 @@ using namespace std;
 class TeacherManagementSystem {
 
 private:
-	map<string,Teacher> m_teacherMap;	//教师集合
+	MyDisorderedList<Teacher> m_teacherList;	//教师链表
 
 public:
 	//initialization
@@ -35,6 +34,7 @@ private:
 	double __getAllWorkload();						//获取全部工作量
 	pair<double,int> __getMaleWorkloadAndNum();		//获取全体男性教师工作量和数量
 	pair<double,int> __getFemaleWorkloadAndNum();	//获取全体女性教师工作量和数量
+	Teacher * __getTeacherById(string id);
 	
 	//Menu
 	void __showMainMenu();										//显示主菜单

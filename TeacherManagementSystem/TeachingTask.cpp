@@ -60,7 +60,7 @@ double TeachingTask::getTotalClassHour() const
 //插入班级，插入成功返回true，若已存在同样的班级返回false
 bool TeachingTask::addClass(string className)
 {
-	if (m_classesList.isExist(className)) return false;
+	if (m_classesList.contains(className)) return false;
 	m_classesList.insert(className);
 	return true;
 }
@@ -68,7 +68,7 @@ bool TeachingTask::addClass(string className)
 //删除班级，删除成功返回true，班级不存在返回false
 bool TeachingTask::deleteClass(string className)
 {
-	if (!m_classesList.isExist(className)) return false;
+	if (!m_classesList.contains(className)) return false;
 	return m_classesList.erase(className);
 }
 

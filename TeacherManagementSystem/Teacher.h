@@ -12,7 +12,7 @@ private:
 	string m_name;						//姓名
 	string m_gender;					//性别
 	string m_post;						//职称
-	set<TeachingTask> m_taskSet;	//教学任务
+	set<TeachingTask> m_taskSet;		//教学任务
 
 public:
 	//initialization
@@ -32,22 +32,22 @@ public:
 
 public:
 	//主要功能函数
-	bool assignTask();	//分配教学任务
+	bool assignTask();		//分配教学任务
 	bool deleteMission();	//删除教学任务
-	bool reviseTask();	//修改教学任务
-	void displayTask();	//显示所有教学任务详情
+	bool reviseTask();		//修改教学任务
+	void displayTask();		//显示所有教学任务详情
 	void showDetailInfo();	//显示教师详细信息
 
 private:
 	//TeachingMissionManagement
 	bool __assignMission(TeachingTask &teachingMission);			//分配教学任务
-	void __listTask();											//输出该教师所有教学任务
-	bool __deleteTask(unsigned int no);							//删除教学任务
+	void __listTask();												//输出该教师所有教学任务
+	bool __deleteTask(unsigned int no);								//删除教学任务
 	void __printLine(int n = 50);									//打印分界线
-	const TeachingTask & __getTaskAt(unsigned int no) const;	//获取教学任务对象
-	void __showRevisionMenu(const TeachingTask &teachingMission);//显示教学任务修改菜单
+	const TeachingTask & __getTaskAt(unsigned int no) const;		//获取教学任务对象
+	void __showRevisionMenu(const TeachingTask &teachingMission);	//显示教学任务修改菜单
 	void __offset(string text, int offset = 16);					//格式化输出
-	void __displayTask();										//显示所有教学任务详情
+	void __displayTask();											//显示所有教学任务详情
 
 public:
 	//comparator

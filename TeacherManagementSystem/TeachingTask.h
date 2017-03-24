@@ -7,10 +7,10 @@ using namespace std;
 
 class TeachingTask {
 private:
-	string m_subjectName;		//任教课程
+	string m_subjectName;					//任教课程
 	MyOrderedList<string> m_classesList;	//班级
-	double m_expTime;			//实验课时
-	double m_praTime;			//理论课时
+	double m_expTime;						//实验课时
+	double m_praTime;						//理论课时
 
 public:
 	//initialization

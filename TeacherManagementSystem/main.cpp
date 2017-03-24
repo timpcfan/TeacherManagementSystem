@@ -1,6 +1,6 @@
 #include <cstdlib>
 #include <iostream>
-#include "TeacherManagementSystem.h"
+//#include "TeacherManagementSystem.h"
 #include "Teacher.h"
 #include "TeachingTask.h"
 #include "MyDisorderedList.h"
@@ -14,7 +14,6 @@ int main() {
 	
 	TeacherManagementSystem tms;
 	tms.start();
-
 
 
 	system("pause");

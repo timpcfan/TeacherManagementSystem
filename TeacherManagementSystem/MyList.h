@@ -19,7 +19,7 @@ public:
 	MyList(const MyList & ml);
 	virtual ~MyList();
 
-	bool isExist(T element) const;
+	bool contains(T element) const;
 	bool empty() const;
 	size_t size() const;
 	bool erase(T element);	//删除第一个与element相等的结点
@@ -27,6 +27,7 @@ public:
 	T getFirst() const;
 	T getLast() const;
 	T get(unsigned pos) const;	//[1:length]
+	T* find(T element);
 	MyIterator<T> begin() const;
 	MyIterator<T> end() const;
 };
@@ -74,7 +75,7 @@ MyList<T>::~MyList()
 
 
 template<typename T>
-bool MyList<T>::isExist(T element) const
+bool MyList<T>::contains(T element) const
 {
 	LNode<T> *p = head;
 	while (p) {
@@ -156,6 +157,17 @@ inline T MyList<T>::get(unsigned pos) const
 		p = p->next;
 	}
 	return p->data;
+}
+
+template<typename T>
+inline T * MyList<T>::find(T element)
+{
+	LNode<T>* p = head;
+	while (p) {
+		if (p->data == element) return &p->data;
+		p = p->next;
+	}
+	return nullptr;
 }
 
 template<typename T>
