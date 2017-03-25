@@ -11,17 +11,6 @@ TeacherManagementSystem::TeacherManagementSystem()
 
 void TeacherManagementSystem::start()
 {
-	//Test//
-
-	__addTeacher(Teacher("1", "test", "男", "教授"));
-	__addTeacher(Teacher("2", "test2", "男", "教授"));
-	__addTeacher(Teacher("3", "test3", "男", "教授"));
-	__addTeacher(Teacher("4", "test4", "女", "教授"));
-	__addTeacher(Teacher("5", "test5", "女", "教授"));
-	__addTeacher(Teacher("6", "test6", "女", "教授"));
-
-
-	//Test//
 
 	while (true) {
 		bool back = false;

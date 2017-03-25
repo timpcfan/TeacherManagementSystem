@@ -5,7 +5,6 @@
 #include "TeachingTask.h"
 #include "MyDisorderedList.h"
 #include "MyOrderedList.h"
-#include <ctime>
 
 using namespace std;
 
