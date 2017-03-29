@@ -25,6 +25,8 @@ public:
 	void reviseTeacher(Teacher *p);					//修改教师信息
 	void loadData();								//读取数据
 	void saveData();								//存储数据
+	void login();									//登录
+	void changePassword();							//修改登录密码
 
 private:
 	void __listTeacher() const;						//排列显示教师

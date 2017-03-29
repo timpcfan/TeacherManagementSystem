@@ -7,6 +7,7 @@ using namespace std;
 
 TeacherManagementSystem::TeacherManagementSystem()
 {
+	login();
 	loadData();
 }
 
@@ -21,7 +22,7 @@ void TeacherManagementSystem::start()
 	while (true) {
 		bool back = false;
 		__showMainMenu();
-		switch (__waitForRequest(1)) {
+		switch (__waitForRequest(2)) {
 		case 1: {//进入教师管理菜单
 			while (true) {
 				bool back = false;
@@ -155,7 +156,10 @@ void TeacherManagementSystem::start()
 			}
 			break;
 		}
-
+		case 2: {
+			changePassword();
+			break;
+		}
 		case 0: {
 			back = true;
 			break;
@@ -314,8 +318,6 @@ void TeacherManagementSystem::loadData()
 {
 	ifstream ifs("tms.dat");
 	if (!ifs.good()) {
-		cout << "欢迎第一次启动本管理系统！" << endl;
-		system("pause");
 		ifs.close();
 		return;
 	}
@@ -366,10 +368,70 @@ void TeacherManagementSystem::saveData()
 		ofs << it->__toString() ;
 		ofs << endl;
 	}
+	ofs.close();
 
 	cout << "已成功将" << m_teacherList.size() << "条数据写入tms.dat文件中！" << endl;
 	cout << "请不要手动修改tms.dat文件，避免造成不必要的数据损失" << endl;
 	system("pause");
+}
+
+void TeacherManagementSystem::login()
+{
+	ifstream ifs("key.dat");
+
+	if (!ifs.good()) {
+		ifs.close();
+		cout << "欢迎第一次使用本系统！" << endl;
+		cout << "请设置密码(请输入英文和数字)：";
+		ofstream ofs("key.dat");
+		string ps;
+		cin >> ps;
+		for (unsigned i = 0; i < ps.length(); i++) {
+			ps[i] += 100; //简单的加密
+		}
+		ofs << ps;
+		ofs.close();
+		return;
+	}
+
+	string ps;
+	ifs >> ps;
+	ifs.close();
+
+	for (unsigned i = 0; i < ps.length(); i++) {
+		ps[i] -= 100;
+	}
+	cout << "请输入密码：";
+	string password;
+	cin >> password;
+	int n = 5;
+	while (password != ps && n--) {
+		cout << "密码错误！还剩" << n + 1 << "次机会！" << endl;
+		cout << "请再次输入密码：";
+		cin >> password;
+	}
+	if (password != ps) {
+		cout << "密码错误次数过多，请重新打开程序!" << endl;
+		system("pause");
+		exit(0);
+	}
+	cout << "欢迎回来！" << endl;
+}
+
+void TeacherManagementSystem::changePassword()
+{
+	
+		cout << "请设置新的密码(请输入英文和数字)：";
+		ofstream ofs("key.dat");
+		string ps;
+		cin >> ps;
+		for (unsigned i = 0; i < ps.length(); i++) {
+			ps[i] += 100; //简单的加密
+		}
+		ofs << ps;
+		cout << "密码修改成功！" << endl;
+		system("pause");
+		ofs.close();
 }
 
 bool TeacherManagementSystem::deleteTeacher()
@@ -466,6 +528,7 @@ void TeacherManagementSystem::__showMainMenu()
 	__offset("主菜单",23);
 	cout << endl;
 	__offset("1 - 进入教师管理系统");
+	__offset("2 - 修改登录密码");
 	__offset("0 - 退出系统");
 
 	__printLine();

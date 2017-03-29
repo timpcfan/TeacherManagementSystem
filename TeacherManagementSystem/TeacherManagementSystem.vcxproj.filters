@@ -58,5 +58,8 @@
     <None Include="save.dat">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="key.dat">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
