@@ -11,7 +11,8 @@ private:
 
 public:
 	//initialization
-	TeacherManagementSystem();
+	TeacherManagementSystem();						//构造函数，读取数据
+	~TeacherManagementSystem();						//析构函数，储存数据
 
 	//启动系统
 	void start();									//主启动函数

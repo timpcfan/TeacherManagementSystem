@@ -7,6 +7,12 @@ using namespace std;
 
 TeacherManagementSystem::TeacherManagementSystem()
 {
+	loadData();
+}
+
+TeacherManagementSystem::~TeacherManagementSystem()
+{
+	saveData();
 }
 
 void TeacherManagementSystem::start()
@@ -308,9 +314,12 @@ void TeacherManagementSystem::loadData()
 {
 	ifstream ifs("tms.dat");
 	if (!ifs.good()) {
-		cout << "文件打开失败！" << endl;
+		cout << "欢迎第一次启动本管理系统！" << endl;
+		system("pause");
+		ifs.close();
 		return;
 	}
+
 	
 	while (ifs.good()) {
 		int nTeacher = 0;
@@ -339,6 +348,10 @@ void TeacherManagementSystem::loadData()
 		}
 	}
 
+
+	cout << "数据加载成功！" << endl;
+	cout << "已成功载入" << m_teacherList.size() << "位教师的数据！" << endl;
+	system("pause");
 	ifs.close();
 }
 
@@ -353,6 +366,9 @@ void TeacherManagementSystem::saveData()
 		ofs << it->__toString() ;
 		ofs << endl;
 	}
+
+	cout << "已成功将" << m_teacherList.size() << "条数据写入tms.dat文件中！" << endl;
+	system("pause");
 }
 
 bool TeacherManagementSystem::deleteTeacher()
