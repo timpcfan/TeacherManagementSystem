@@ -4,8 +4,8 @@
 using namespace std;
 
 int main() {
-	TeacherManagementSystem tms;
 
+	TeacherManagementSystem tms;
 	tms.start();
 
 	return 0;

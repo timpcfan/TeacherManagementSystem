@@ -368,6 +368,7 @@ void TeacherManagementSystem::saveData()
 	}
 
 	cout << "已成功将" << m_teacherList.size() << "条数据写入tms.dat文件中！" << endl;
+	cout << "请不要手动修改tms.dat文件，避免造成不必要的数据损失" << endl;
 	system("pause");
 }
 
