@@ -31,6 +31,7 @@ public:
 	bool addClass(string className);		//添加班级
 	bool deleteClass(string className);		//删除班级
 	void listClass() const;					//列出班级并分配序号
+	string toString();
 
 public:
 	//comparator

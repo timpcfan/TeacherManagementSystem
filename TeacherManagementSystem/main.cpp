@@ -1,17 +1,15 @@
 #include <cstdlib>
-#include <iostream>
 #include "TeacherManagementSystem.h"
-#include "Teacher.h"
-#include "TeachingTask.h"
-#include "MyDisorderedList.h"
-#include "MyOrderedList.h"
 
 using namespace std;
 
 int main() {
 
 	TeacherManagementSystem tms;
+
+	tms.loadData();
 	tms.start();
+	tms.saveData();
 
 	system("pause");
 	return 0;

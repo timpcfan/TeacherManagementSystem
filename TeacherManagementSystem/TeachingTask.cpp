@@ -1,5 +1,6 @@
 #include "TeachingTask.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -87,6 +88,17 @@ void TeachingTask::listClass() const
 	}
 	if (count % 5 != 1) cout << endl;
 	cout << endl;
+}
+
+string TeachingTask::toString()
+{
+	stringstream ss;
+	ss << m_classesList.size() << " ";
+	for (MyIterator<string> it = m_classesList.begin(); it != m_classesList.end(); it++) {
+		ss << *it << " ";
+	}
+	string s = ss.str();
+	return s;
 }
 
 bool TeachingTask::operator<(const TeachingTask & other) const

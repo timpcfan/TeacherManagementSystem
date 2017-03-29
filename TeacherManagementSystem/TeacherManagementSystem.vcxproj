@@ -33,6 +33,10 @@
     <ClInclude Include="TeacherManagementSystem.h" />
     <ClInclude Include="TeachingTask.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="save.dat" />
+    <None Include="tms.dat" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EAF4C971-3458-47DD-AEFE-5F3605EAC1AD}</ProjectGuid>
     <RootNamespace>TeacherManagementSystem</RootNamespace>

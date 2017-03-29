@@ -1,6 +1,6 @@
 #include "TeacherManagementSystem.h"
 #include <iostream>
-#include <algorithm>
+#include <fstream>
 
 using namespace std;
 
@@ -302,6 +302,57 @@ void TeacherManagementSystem::reviseTeacher(Teacher *teacher)
 	cout << "已完成修改,现在该教师信息如下：" << endl;
 	cout << *teacher << endl;
 	system("pause");
+}
+
+void TeacherManagementSystem::loadData()
+{
+	ifstream ifs("tms.dat");
+	if (!ifs.good()) {
+		cout << "文件打开失败！" << endl;
+		return;
+	}
+	
+	while (ifs.good()) {
+		int nTeacher = 0;
+		ifs >> nTeacher;
+		while (nTeacher--) {
+			string id, name, gender, post;
+			ifs >> id >> name >> gender >> post;
+			Teacher *t = new Teacher(id, name, gender, post);
+			__addTeacher(*t);
+			
+			int nTT;
+			ifs >> nTT;//教学任务数量
+			while (nTT--) {
+				double exp = 0, pra = 0;
+				string subName;
+				int nClass; //班级数量
+				ifs >> exp >> pra >> subName >> nClass;
+				TeachingTask *tt = new TeachingTask(subName, exp, pra);
+				while (nClass--) {
+					string className;
+					ifs >> className;
+					tt->addClass(className);
+				}
+				__getTeacherById(id)->__assignTask(*tt);
+			}
+		}
+	}
+
+	ifs.close();
+}
+
+void TeacherManagementSystem::saveData()
+{
+	ofstream ofs("tms.dat");
+
+	ofs << m_teacherList.size() << endl;
+	for (MyIterator<Teacher> it = m_teacherList.begin(); it != m_teacherList.end(); it++) {
+		ofs << it->getId() << " " << it->getName() << " "
+			<< it->getGender() << " " << it->getPost() << " ";
+		ofs << it->__toString() ;
+		ofs << endl;
+	}
 }
 
 bool TeacherManagementSystem::deleteTeacher()

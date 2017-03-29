@@ -1,6 +1,7 @@
 #include "Teacher.h"
 #include "TeachingTask.h"
 #include <iostream>
+#include <sstream>
 #include <cstdlib>
 #include <cmath>
 
@@ -14,7 +15,8 @@ Teacher::Teacher()
 Teacher::Teacher(string id, string name, string gender, string post)
 	:m_id(id), m_name(name), m_gender(gender), m_post(post)
 {
-
+	if (m_gender != "男" && m_gender != "女") m_gender = "男";
+	if (m_post != "助教" && m_post != "讲师" &&  m_post != "副教授" && m_post != "教授") m_post = "助教";
 }
 
 string Teacher::getId() const
@@ -57,6 +59,11 @@ void Teacher::setPost(string post)
 	m_post = post;
 }
 
+int Teacher::getTaskNum() const
+{
+	return m_taskList.size();
+}
+
 double Teacher::getTotalWorkload() const
 {
 	double ret = 0;
@@ -65,7 +72,7 @@ double Teacher::getTotalWorkload() const
 	return ret;
 }
 
-bool Teacher::__assignMission(TeachingTask & teachingTask)
+bool Teacher::__assignTask(TeachingTask & teachingTask)
 {
 	m_taskList.push_back(teachingTask);
 	return true;
@@ -106,6 +113,18 @@ TeachingTask * Teacher::__getTaskAt(unsigned no)
 	MyIterator<TeachingTask> it = m_taskList.begin();
 	for (unsigned i = 1; i < no; i++) it++;
 	return &(*it);
+}
+
+string Teacher::__toString()
+{
+	stringstream ss;
+	ss << getTaskNum() << " ";
+	for (MyIterator<TeachingTask> it = m_taskList.begin(); it != m_taskList.end(); it++) {
+		ss << it->getExpTime() << " " << it->getPraTime() << " " << it->getName() << " ";
+		ss << it->toString() << " ";
+	}
+	string s = ss.str();
+	return s;
 }
 
 bool Teacher::assignTask()
@@ -168,7 +187,7 @@ bool Teacher::assignTask()
 	}
 
 
-	if (!__assignMission(*tm)) {
+	if (!__assignTask(*tm)) {
 		cout << "添加课程失败！" << endl;
 		return false;
 	}
@@ -441,3 +460,5 @@ ostream & operator<<(ostream & out, const Teacher & teacher)
 		<< teacher.getTotalWorkload() << "]";
 	return out;
 }
+
+

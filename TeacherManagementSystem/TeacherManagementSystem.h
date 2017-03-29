@@ -22,6 +22,8 @@ public:
 	void sortAndShowTeacher();						//排序并显示教师
 	void displayWorkingStat();						//显示工作量统计信息
 	void reviseTeacher(Teacher *p);					//修改教师信息
+	void loadData();								//读取数据
+	void saveData();								//存储数据
 
 private:
 	void __listTeacher() const;						//排列显示教师
